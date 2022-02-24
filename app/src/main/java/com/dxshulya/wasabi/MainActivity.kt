@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
             ), drawerLayout
         )
 
+        navController.addOnDestinationChangedListener(this)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }

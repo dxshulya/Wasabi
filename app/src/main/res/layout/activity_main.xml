@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:layout_gravity="center"
-            android:background="@color/purple_500"
+            android:background="@color/blueLight"
             android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"
             app:contentInsetLeft="0dp"
             app:contentInsetStart="0dp"

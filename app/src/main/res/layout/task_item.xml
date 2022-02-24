@@ -57,7 +57,7 @@
             android:id="@+id/like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_favorite"
+            android:src="@drawable/ic_launcher_foreground"
             app:tint="@color/red"
             android:layout_margin="6dp"
             android:layout_alignParentEnd="true"/>
