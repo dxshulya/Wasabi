@@ -26,7 +26,5 @@
     <string name="task_text">Текст</string>
     <string name="task_answer">Ответ</string>
     <string name="task_formula">Формула</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
