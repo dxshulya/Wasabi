@@ -2,12 +2,31 @@
     <string name="app_name">Wasabi</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">Имя</string>
+    <string name="nav_header_subtitle">Почта</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_reg">Регистрация</string>
+    <string name="menu_login">Авторизация</string>
+    <string name="menu_task">Термохимия</string>
+    <string name="menu_fav">Избранное</string>
+
+    <string name="email_reg">Введите свой email</string>
+    <string name="name">Как вас зовут?</string>
+    <string name="password_reg">Придумайте пароль</string>
+    <string name="link_reg">Уже есть аккаунт?</string>
+    <string name="registrationButton">Зарегистрироваться</string>
+
+    <string name="email_login">Email</string>
+    <string name="password_login">Пароль</string>
+    <string name="link_log">У меня нет аккаунта</string>
+    <string name="loginButton">Войти</string>
+
+    <string name="task_number">Номер</string>
+    <string name="task_text">Текст</string>
+    <string name="task_answer">Ответ</string>
+    <string name="task_formula">Формула</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

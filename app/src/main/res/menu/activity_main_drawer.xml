@@ -5,16 +5,20 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
+            android:id="@+id/nav_task"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/menu_task" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:id="@+id/nav_favorite"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/menu_fav" />
     </group>
+    <item android:title="Выход из аккаунта">
+        <menu>
+            <item
+                android:id="@+id/exit"
+                android:icon="@drawable/ic_launcher_foreground"
+                android:title="Выход" />
+        </menu>
+    </item>
 </menu>
