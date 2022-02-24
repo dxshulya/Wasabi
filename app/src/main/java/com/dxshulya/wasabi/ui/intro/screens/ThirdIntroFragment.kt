@@ -5,14 +5,24 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import com.dxshulya.wasabi.R
 import com.dxshulya.wasabi.databinding.FragmentThirdIntroBinding
 
 class ThirdIntroFragment : Fragment() {
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentThirdIntroBinding.inflate(inflater, container, false)
+
+        binding.registrationButton.setOnClickListener {
+            this.findNavController().navigate(R.id.action_introFragment_to_registrationFragment)
+        }
+        binding.loginButton.setOnClickListener {
+            this.findNavController().navigate(R.id.action_introFragment_to_loginFragment)
+        }
 
         return binding.root
     }
