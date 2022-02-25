@@ -9,7 +9,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [(NetworkModule::class), (RepositoryModule::class)])
+@Component(modules = [(NetworkModule::class), (RepositoryModule::class), (AppModule::class)])
 interface AppComponent {
     fun inject(taskRepository: TaskRepository)
     fun inject(taskViewModel: TaskViewModel)

@@ -1,10 +1,7 @@
 package com.dxshulya.wasabi
 
 import android.app.Application
-import com.dxshulya.wasabi.di.AppComponent
-import com.dxshulya.wasabi.di.DaggerAppComponent
-import com.dxshulya.wasabi.di.NetworkModule
-import com.dxshulya.wasabi.di.RepositoryModule
+import com.dxshulya.wasabi.di.*
 
 class App: Application() {
 
@@ -17,6 +14,7 @@ class App: Application() {
         appComponent = DaggerAppComponent.builder()
             .networkModule(NetworkModule())
             .repositoryModule(RepositoryModule())
+            .appModule(AppModule(this))
             .build()
     }
 
