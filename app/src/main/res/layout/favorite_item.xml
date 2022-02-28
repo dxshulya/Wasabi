@@ -7,7 +7,7 @@
     app:cardCornerRadius="5dp"
     app:cardElevation="3dp"
     android:layout_margin="4dp"
-    android:id="@+id/card_view">
+    android:id="@+id/card_view2">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
         android:layout_margin="10dp">
 
         <TextView
-            android:id="@+id/task_number"
+            android:id="@+id/favorite_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/task_number"
@@ -24,40 +24,40 @@
             android:layout_alignParentStart="true"/>
 
         <TextView
-            android:id="@+id/task_formula"
+            android:id="@+id/favorite_formula"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/task_formula"
             android:textSize="14sp"
             android:layout_margin="6dp"
             android:layout_alignParentStart="true"
-            android:layout_below="@id/task_number"/>
+            android:layout_below="@id/favorite_number"/>
 
         <TextView
-            android:id="@+id/task_text"
+            android:id="@+id/favorite_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/task_text"
             android:textSize="14sp"
             android:layout_margin="6dp"
             android:layout_alignParentStart="true"
-            android:layout_below="@id/task_formula"/>
+            android:layout_below="@id/favorite_formula"/>
 
         <TextView
-            android:id="@+id/task_answer"
+            android:id="@+id/favorite_answer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/task_answer"
             android:textSize="14sp"
             android:layout_margin="6dp"
             android:layout_alignParentStart="true"
-            android:layout_below="@id/task_text"/>
+            android:layout_below="@id/favorite_text"/>
 
         <ImageView
             android:id="@+id/like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_favorite_border"
+            android:src="@drawable/ic_favorite"
             app:tint="@color/red"
             android:layout_margin="6dp"
             android:layout_alignParentEnd="true"/>

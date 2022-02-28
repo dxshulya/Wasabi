@@ -10,6 +10,7 @@ class SharedPreference(context: Context) {
         private const val PASSWORD = "password"
         private const val JWT_TOKEN = "jwt_token"
         private const val IS_FIRST_RUN = "true"
+        private const val TOTAL_PAGE = "page"
     }
 
     private var sharedPreferences = context.getSharedPreferences("user-pref", Context.MODE_PRIVATE)
@@ -30,6 +31,15 @@ class SharedPreference(context: Context) {
     private fun getBoolean(key: String, defaultValue: Boolean = true): Boolean {
         return sharedPreferences.getBoolean(key, defaultValue)
     }
+
+    private fun setInt(key: String, value: Int) {
+        sharedPreferencesEditor.putInt(key, value).apply()
+    }
+
+    private fun getInt(key: String, defaultValue: Int = 0): Int {
+        return sharedPreferences.getInt(key, defaultValue)
+    }
+
 
     var email: String
         get() = getString(EMAIL)
@@ -55,5 +65,10 @@ class SharedPreference(context: Context) {
         get() = getBoolean(IS_FIRST_RUN)
         set(value) {
             setBoolean(IS_FIRST_RUN, value)
+        }
+    var totalPage: Int
+        get() = getInt(TOTAL_PAGE)
+        set(value) {
+            setInt(TOTAL_PAGE, value)
         }
 }

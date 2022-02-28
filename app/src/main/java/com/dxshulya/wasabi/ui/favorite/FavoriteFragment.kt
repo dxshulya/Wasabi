@@ -1,32 +1,55 @@
 package com.dxshulya.wasabi.ui.favorite
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.dxshulya.wasabi.R
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.dxshulya.wasabi.databinding.FavoriteFragmentBinding
 
 class FavoriteFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = FavoriteFragment()
+    class FavoriteFragment : Fragment() {
+
+        companion object {
+            fun newInstance() = FavoriteFragment()
+        }
+
+        private lateinit var viewModel: FavoriteViewModel
+        //private val favoriteAdapter = FavoriteAdapter()
+
+        private lateinit var binding: FavoriteFragmentBinding
+
+        private lateinit var favoriteRecycler: RecyclerView
+
+        private fun initUis() {
+            favoriteRecycler = binding.favouriteRecycler
+        }
+
+        override fun onCreateView(
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
+        ): View {
+            binding = FavoriteFragmentBinding.inflate(inflater, container, false)
+            initUis()
+//            favoriteRecycler.apply {
+//                adapter = favoriteAdapter
+//                layoutManager = LinearLayoutManager(context)
+//                setHasFixedSize(true)
+//            }
+//            viewModel.favorites.observe(viewLifecycleOwner) {
+//                favoriteAdapter.submitList(it)
+//            }
+
+            return binding.root
+        }
+
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            viewModel = ViewModelProvider(this)[FavoriteViewModel::class.java]
+        }
     }
-
-    private lateinit var viewModel: FavoriteViewModel
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.favorite_fragment, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(FavoriteViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
 }

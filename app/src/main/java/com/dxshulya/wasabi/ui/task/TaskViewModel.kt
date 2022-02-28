@@ -28,7 +28,7 @@ class TaskViewModel : ViewModel() {
 
     fun getTasks() {
         val count = 10
-        taskRepository.getTasks("Bearer " + sharedPreference.token, count)
+        taskRepository.getTasks("Bearer " + sharedPreference.token, count, 1)
             .subscribe {
                 _tasks.value = it
             }

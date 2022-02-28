@@ -22,8 +22,8 @@ class TaskRepository(private val api: Api) {
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun getTasks(token: String, count: Int): Observable<List<Task>> {
-        return api.getTasks(token, count)
+    fun getTasks(token: String, count: Int, page: Int): Observable<List<Task>> {
+        return api.getTasks(token, count, page)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
@@ -34,9 +34,9 @@ class TaskRepository(private val api: Api) {
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun getFavorites(token: String): Observable<List<Task>> {
-        return api.getFavorites(token)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-    }
+//    fun getFavorites(token: String, count: Int, page: Int): Observable<MutableList<Favorites.Favorite>> {
+//        return api.getFavorites(token, count, page)
+//            .subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//    }
 }

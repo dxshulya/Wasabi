@@ -23,6 +23,7 @@ interface Api {
     fun getTasks(
         @Header("Authorization") token: String,
         @Query("count") count: Int,
+        @Query("page") page: Int,
     ): Observable<List<Task>>
 
     //Favorites
@@ -32,8 +33,10 @@ interface Api {
         @Body body: Task
     ): Observable<Authorization>
 
-    @GET("favourites/getAllFavourites")
-    fun getFavorites(
-        @Header("Authorization") token: String,
-    ): Observable<List<Task>>
+//    @GET("favourites/getAllFavourites")
+//    fun getFavorites(
+//        @Header("Authorization") token: String,
+//        @Query ("count") count: Int,
+//        @Query ("page") page: Int,
+//    ): Observable<MutableList<Favorites.Favorite>>
 }
