@@ -31,6 +31,7 @@ class FavoriteViewModel : ViewModel() {
         taskRepository.getFavorites("Bearer " + sharedPreference.token, 10, 1)
             .subscribe({
                 _favorites.value = it.array
+                sharedPreference.totalPage = it.totalPage
             }, {
                 Log.e("FVM", it.message.toString())
             })

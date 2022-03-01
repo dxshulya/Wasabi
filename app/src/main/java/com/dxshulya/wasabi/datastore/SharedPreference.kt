@@ -40,7 +40,6 @@ class SharedPreference(context: Context) {
         return sharedPreferences.getInt(key, defaultValue)
     }
 
-
     var email: String
         get() = getString(EMAIL)
         set(value) {
