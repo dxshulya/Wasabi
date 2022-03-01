@@ -3,6 +3,7 @@ package com.dxshulya.wasabi.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.dxshulya.wasabi.R
@@ -14,6 +15,7 @@ class FavoriteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val favoriteFormula: TextView = view.findViewById(R.id.favorite_formula)
     private val favoriteText: TextView = view.findViewById(R.id.favorite_text)
     private val favoriteAnswer: TextView = view.findViewById(R.id.favorite_answer)
+    private val favoriteLike: ImageView = view.findViewById(R.id.favorite_like)
 
     fun bind(favorite: Favorites.Favorite) {
         favoriteNumber.text = "№ " + (position + 1)
