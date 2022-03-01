@@ -32,6 +32,7 @@ class FavoriteViewModel : ViewModel() {
             .subscribe({
                 _favorites.value = it.array
                 sharedPreference.totalPage = it.totalPage
+                sharedPreference.totalCount = it.totalCount
             }, {
                 Log.e("FVM", it.message.toString())
             })

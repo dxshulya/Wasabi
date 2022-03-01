@@ -11,6 +11,7 @@ class SharedPreference(context: Context) {
         private const val JWT_TOKEN = "jwt_token"
         private const val IS_FIRST_RUN = "true"
         private const val TOTAL_PAGE = "page"
+        private const val TOTAL_COUNT = "count"
     }
 
     private var sharedPreferences = context.getSharedPreferences("user-pref", Context.MODE_PRIVATE)
@@ -69,5 +70,10 @@ class SharedPreference(context: Context) {
         get() = getInt(TOTAL_PAGE)
         set(value) {
             setInt(TOTAL_PAGE, value)
+        }
+    var totalCount: Int
+        get() = getInt(TOTAL_COUNT)
+        set(value) {
+            setInt(TOTAL_COUNT, value)
         }
 }
