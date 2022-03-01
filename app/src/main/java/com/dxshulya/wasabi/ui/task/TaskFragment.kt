@@ -12,6 +12,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.dxshulya.wasabi.R
 import com.dxshulya.wasabi.adapter.TaskAdapter
 import com.dxshulya.wasabi.databinding.TaskFragmentBinding
+import com.google.android.material.navigation.NavigationBarItemView
+import com.google.android.material.navigation.NavigationView
 
 class TaskFragment : Fragment() {
 
@@ -61,5 +63,4 @@ class TaskFragment : Fragment() {
         taskRefresh = binding.taskRefresh
         taskRecycler = binding.taskRecycler
     }
-
 }

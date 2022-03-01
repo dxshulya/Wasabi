@@ -7,6 +7,7 @@ import com.dxshulya.wasabi.App
 import com.dxshulya.wasabi.datastore.SharedPreference
 import com.dxshulya.wasabi.model.Task
 import com.dxshulya.wasabi.repository.TaskRepository
+import com.google.android.material.navigation.NavigationView
 import javax.inject.Inject
 
 class TaskViewModel : ViewModel() {

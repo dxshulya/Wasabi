@@ -34,6 +34,7 @@ class LoginViewModel : ViewModel() {
             .subscribe({
                 _loginLiveData.value = it
                 sharedPreference.token = it.token
+                sharedPreference.name = it.login
             }, {
                 if (it is HttpException) {
                     val body = it.response()?.errorBody()

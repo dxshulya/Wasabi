@@ -1,9 +1,7 @@
 package com.dxshulya.wasabi.repository
 
 import com.dxshulya.wasabi.data.Api
-import com.dxshulya.wasabi.model.Authorization
-import com.dxshulya.wasabi.model.Task
-import com.dxshulya.wasabi.model.User
+import com.dxshulya.wasabi.model.*
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -34,9 +32,9 @@ class TaskRepository(private val api: Api) {
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-//    fun getFavorites(token: String, count: Int, page: Int): Observable<MutableList<Favorites.Favorite>> {
-//        return api.getFavorites(token, count, page)
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//    }
+    fun getFavorites(token: String, count: Int, page: Int): Observable<Favorites> {
+        return api.getFavorites(token, count, page)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
 }

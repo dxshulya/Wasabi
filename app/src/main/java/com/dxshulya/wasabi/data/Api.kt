@@ -1,6 +1,7 @@
 package com.dxshulya.wasabi.data
 
 import com.dxshulya.wasabi.model.Authorization
+import com.dxshulya.wasabi.model.Favorites
 import com.dxshulya.wasabi.model.Task
 import com.dxshulya.wasabi.model.User
 import io.reactivex.rxjava3.core.Observable
@@ -33,10 +34,10 @@ interface Api {
         @Body body: Task
     ): Observable<Authorization>
 
-//    @GET("favourites/getAllFavourites")
-//    fun getFavorites(
-//        @Header("Authorization") token: String,
-//        @Query ("count") count: Int,
-//        @Query ("page") page: Int,
-//    ): Observable<MutableList<Favorites.Favorite>>
+    @GET("favourites/getAllFavourites")
+    fun getFavorites(
+        @Header("Authorization") token: String,
+        @Query ("count") count: Int,
+        @Query ("page") page: Int,
+    ): Observable<Favorites>
 }
