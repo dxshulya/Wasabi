@@ -1,7 +1,9 @@
 package com.dxshulya.wasabi
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import com.google.android.material.snackbar.Snackbar
@@ -47,7 +49,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_task, R.id.nav_favorite
+                R.id.nav_task, R.id.nav_favorite, R.id.exit
             ), drawerLayout
         )
 
@@ -62,9 +64,17 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main_menu, menu)
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val currentItem = item.itemId
+
+        if (currentItem == R.id.nav_favorite){
+            findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.nav_favorite)
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onDestinationChanged(
@@ -75,6 +85,10 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         when (destination.id) {
             R.id.splashFragment, R.id.registrationFragment, R.id.loginFragment, R.id.introFragment -> {
                 binding.toolbar.visibility = View.GONE
+            }
+            R.id.exit -> {
+//                this.findNavController(R.id.nav_host_fragment_content_main)
+//                    .navigate(R.id.action_splashFragment_to_registrationFragment)
             }
             else -> {
                 binding.toolbar.visibility = View.VISIBLE
