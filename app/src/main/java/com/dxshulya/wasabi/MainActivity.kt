@@ -61,6 +61,12 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
     override fun onDestinationChanged(
         controller: NavController,
         destination: NavDestination,
@@ -76,6 +82,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
             }
         }
     }
+
 
     override fun onBackPressed() {
         if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
