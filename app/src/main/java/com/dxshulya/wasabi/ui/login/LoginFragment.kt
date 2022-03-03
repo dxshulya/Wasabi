@@ -53,7 +53,7 @@ class LoginFragment : Fragment() {
 
     private fun initButton() {
         nextButton.setOnClickListener {
-            if (!validateEmail() || !validatePassword()) {
+            if (!validateEmail() && !validatePassword()) {
                 //clearStore()
             }
             else viewModel.postLogin()
@@ -74,40 +74,43 @@ class LoginFragment : Fragment() {
         }
     }
 
-    override fun onPause() {
-        compositeDisposable.clear()
-        super.onPause()
+    override fun onDestroy() {
+        compositeDisposable.dispose()
+        super.onDestroy()
     }
 
     private fun validateEmail(): Boolean {
         return (edtEmail.text.toString().validator()
             .validEmail().addErrorCallback {
-                edtEmail.error = "Некорректный адрес!"
+                tilEmail.error = getString(R.string.error_email)
             }
             .maxLength(50).addErrorCallback {
-                edtEmail.error = "Максимум 50 символов!"
+                tilEmail.error = getString(R.string.error_max)
             }
             .nonEmpty().addErrorCallback {
-                edtEmail.error = "Пустое поле!"
+                tilEmail.error = getString(R.string.error_empty)
             }.check())
     }
 
     private fun validatePassword(): Boolean {
         return (edtPassword.text.toString().validator()
             .maxLength(50).addErrorCallback {
-                edtPassword.error = "Максимум 50 символов!"
+                tilPassword.error = getString(R.string.error_max)
+            }
+            .minLength(7).addErrorCallback {
+                tilPassword.error = getString(R.string.error_min)
             }
             .nonEmpty().addErrorCallback {
-                edtPassword.error = "Пустое поле!"
+                tilPassword.error = getString(R.string.error_empty)
             }.check())
     }
 
     private fun showErrorWindow(message: String) {
         context?.let {
             MaterialAlertDialogBuilder(it)
-                .setTitle("Упс!")
+                .setTitle(getString(R.string.error_window_title))
                 .setMessage(message)
-                .setPositiveButton("ОК") { dialog, _ -> dialog.dismiss() }
+                .setPositiveButton(getString(R.string.error_window_btn)) { dialog, _ -> dialog.dismiss() }
                 .show()
         }
     }

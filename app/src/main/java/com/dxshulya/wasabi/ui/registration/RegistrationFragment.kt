@@ -86,9 +86,9 @@ class RegistrationFragment : Fragment() {
     private fun showErrorWindow(message: String) {
         context?.let {
             MaterialAlertDialogBuilder(it)
-                .setTitle("Упс!")
+                .setTitle(getString(R.string.error_window_title))
                 .setMessage(message)
-                .setPositiveButton("ОК") { dialog, _ -> dialog.dismiss() }
+                .setPositiveButton(R.string.error_window_btn) { dialog, _ -> dialog.dismiss() }
                 .show()
         }
     }
@@ -124,9 +124,9 @@ class RegistrationFragment : Fragment() {
 
     private fun checkFields() {
         viewModel.registrationLiveData.observe(viewLifecycleOwner) {
-            if (it.statusCode == 400 || it.token == "") {
+            if (it.statusCode == 400 || it.statusCode == 401 || it.token == "") {
                 showErrorWindow(it.message.toString())
-                clearStore()
+                //clearStore()
             } else {
                 this.findNavController().navigate(R.id.action_registrationFragment_to_taskFragment)
             }
@@ -150,7 +150,7 @@ class RegistrationFragment : Fragment() {
 
     private fun initButton() {
         nextButton.setOnClickListener {
-            if (!validateEmail() || !validateName() || !validatePassword()) {
+            if (!validateEmail() && !validateName() && !validatePassword()) {
                 Log.e("VALIDATE_ERROR", "")
             } else viewModel.postRegistration()
         }
@@ -159,36 +159,36 @@ class RegistrationFragment : Fragment() {
     private fun validateEmail(): Boolean {
         return (edtEmail.text.toString().validator()
             .validEmail().addErrorCallback {
-                edtEmail.error = "Некорректный адрес!"
+                tilEmail.error = getString(R.string.error_email)
             }
             .maxLength(50).addErrorCallback {
-                edtEmail.error = "Максимум 50 символов!"
+                tilEmail.error = getString(R.string.error_max)
             }
             .nonEmpty().addErrorCallback {
-                edtEmail.error = "Пустое поле!"
+                tilEmail.error = getString(R.string.error_empty)
             }.check())
     }
 
     private fun validateName(): Boolean {
         return (edtName.text.toString().validator()
             .maxLength(50).addErrorCallback {
-                edtName.error = "Максимум 50 символов!"
+                tilName.error = getString(R.string.error_max)
             }
             .nonEmpty().addErrorCallback {
-                edtName.error = "Пустое поле!"
+                tilName.error = getString(R.string.error_empty)
             }.check())
     }
 
     private fun validatePassword(): Boolean {
         return (edtPassword.text.toString().validator()
             .maxLength(50).addErrorCallback {
-                edtPassword.error = "Максимум 50 символов!"
+                tilPassword.error = getString(R.string.error_max)
             }
             .nonEmpty().addErrorCallback {
-                edtPassword.error = "Пустое поле!"
+                tilPassword.error = getString(R.string.error_empty)
             }
             .minLength(7).addErrorCallback {
-                edtPassword.error = "Минимум 7 символов!"
+                tilPassword.error = getString(R.string.error_min)
             }.check())
     }
 }

@@ -27,4 +27,12 @@
     <string name="task_answer">Ответ</string>
     <string name="task_formula">Формула</string>
 
+    <string name="error_email">Некорректный адрес!</string>
+    <string name="error_empty">Пустое поле!</string>
+    <string name="error_max">Максимум 50 символов!</string>
+    <string name="error_min">Минимум 7 символов!</string>
+
+    <string name="error_window_title">Упс!</string>
+    <string name="error_window_btn">ОК</string>
+
 </resources>
