@@ -184,11 +184,11 @@ class RegistrationFragment : Fragment() {
             .maxLength(50).addErrorCallback {
                 tilPassword.error = getString(R.string.error_max)
             }
-            .nonEmpty().addErrorCallback {
-                tilPassword.error = getString(R.string.error_empty)
-            }
             .minLength(7).addErrorCallback {
                 tilPassword.error = getString(R.string.error_min)
+            }
+            .nonEmpty().addErrorCallback {
+                tilPassword.error = getString(R.string.error_empty)
             }.check())
     }
 }
