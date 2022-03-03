@@ -2,6 +2,7 @@ package com.dxshulya.wasabi.ui.registration
 
 import android.os.Bundle
 import android.util.Log
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +17,6 @@ import com.dxshulya.wasabi.util.Util.Companion.toObservable
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import com.wajahatkarim3.easyvalidation.core.view_ktx.validator
 import io.reactivex.rxjava3.core.BackpressureStrategy
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -61,6 +61,9 @@ class RegistrationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUis()
+        emailFocusListener()
+        nameFocusListener()
+        passwordFocusListener()
         subscribeFields()
         checkFields()
         linkToLoginFragment()
@@ -126,7 +129,6 @@ class RegistrationFragment : Fragment() {
         viewModel.registrationLiveData.observe(viewLifecycleOwner) {
             if (it.statusCode == 400 || it.statusCode == 401 || it.token == "") {
                 showErrorWindow(it.message.toString())
-                //clearStore()
             } else {
                 this.findNavController().navigate(R.id.action_registrationFragment_to_taskFragment)
             }
@@ -141,45 +143,92 @@ class RegistrationFragment : Fragment() {
 
     private fun initButton() {
         nextButton.setOnClickListener {
-            if (!validateEmail() || !validateName() || !validatePassword()) {
-                Log.e("VALIDATE_ERROR", "")
-            } else viewModel.postRegistration()
+            submitForm()
         }
     }
 
-    private fun validateEmail(): Boolean {
-        return (edtEmail.text.toString().validator()
-            .validEmail().addErrorCallback {
-                tilEmail.error = getString(R.string.error_email)
-            }
-            .maxLength(50).addErrorCallback {
-                tilEmail.error = getString(R.string.error_max)
-            }
-            .nonEmpty().addErrorCallback {
-                tilEmail.error = getString(R.string.error_empty)
-            }.check())
+    private fun submitForm() {
+        tilEmail.error = validEmail()
+        tilName.error = validName()
+        tilPassword.error = validPassword()
+
+        val validEmail = tilEmail.error == null
+        val validName = tilName.error == null
+        val validPassword = tilPassword.error == null
+
+        if(validEmail && validName && validPassword)
+            viewModel.postRegistration()
+        else invalidForm()
     }
 
-    private fun validateName(): Boolean {
-        return (edtName.text.toString().validator()
-            .maxLength(50).addErrorCallback {
-                tilName.error = getString(R.string.error_max)
-            }
-            .nonEmpty().addErrorCallback {
-                tilName.error = getString(R.string.error_empty)
-            }.check())
+    private fun invalidForm() {
+        var message = ""
+        if(tilEmail.error != null) message += tilEmail.error
+        if(tilName.error != null) message += tilName.error
+        if(tilPassword.error!= null) message += tilPassword.error
     }
 
-    private fun validatePassword(): Boolean {
-        return (edtPassword.text.toString().validator()
-            .maxLength(50).addErrorCallback {
-                tilPassword.error = getString(R.string.error_max)
+    private fun emailFocusListener() {
+        edtEmail.setOnFocusChangeListener { _, focused ->
+            if(!focused) {
+                tilEmail.error = validEmail()
             }
-            .minLength(7).addErrorCallback {
-                tilPassword.error = getString(R.string.error_min)
-            }
-            .nonEmpty().addErrorCallback {
-                tilPassword.error = getString(R.string.error_empty)
-            }.check())
+        }
     }
+
+    private fun validEmail(): String? {
+        val email = edtEmail.text.toString()
+        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            return getString(R.string.error_email)
+        }
+        if (email.length > 50) {
+            return getString(R.string.error_max)
+        }
+        if (email == "") {
+            return getString(R.string.error_empty)
+        }
+        return null
+    }
+
+    private fun nameFocusListener() {
+        edtName.setOnFocusChangeListener { _, focused ->
+            if(!focused) {
+                tilName.error = validName()
+            }
+        }
+    }
+
+    private fun validName(): String? {
+        val name = edtName.text.toString()
+        if(name.length > 50) {
+            return getString(R.string.error_max)
+        }
+        if(name == "") {
+            return getString(R.string.error_empty)
+        }
+        return null
+    }
+
+    private fun passwordFocusListener() {
+        edtPassword.setOnFocusChangeListener { _, focused ->
+            if(!focused) {
+                tilPassword.error = validPassword()
+            }
+        }
+    }
+
+    private fun validPassword(): String? {
+        val password = edtPassword.text.toString()
+        if(password.length > 50) {
+            return getString(R.string.error_max)
+        }
+        if(password.length < 7) {
+            return getString(R.string.error_min)
+        }
+        if (password == "") {
+            return getString(R.string.error_empty)
+        }
+        return null
+    }
+
 }
