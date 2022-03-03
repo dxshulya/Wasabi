@@ -53,7 +53,7 @@ class LoginFragment : Fragment() {
 
     private fun initButton() {
         nextButton.setOnClickListener {
-            if (!validateEmail() && !validatePassword()) {
+            if (!validateEmail() || !validatePassword()) {
                 //clearStore()
             }
             else viewModel.postLogin()
@@ -63,14 +63,6 @@ class LoginFragment : Fragment() {
             Log.e("PASS", viewModel.sharedPreference.password)
             Log.e("TOKEN", viewModel.sharedPreference.token)
 
-        }
-    }
-
-    private fun clearStore() {
-        viewModel.apply {
-            sharedPreference.email = ""
-            sharedPreference.password = ""
-            sharedPreference.token = ""
         }
     }
 

@@ -133,15 +133,6 @@ class RegistrationFragment : Fragment() {
         }
     }
 
-    private fun clearStore() {
-        viewModel.apply {
-            sharedPreference.email = ""
-            sharedPreference.name = ""
-            sharedPreference.password = ""
-            sharedPreference.token = ""
-        }
-    }
-
     private fun linkToLoginFragment() {
         linkToLoginFragment.setOnClickListener {
             this.findNavController().navigate(R.id.action_registrationFragment_to_loginFragment)
@@ -150,7 +141,7 @@ class RegistrationFragment : Fragment() {
 
     private fun initButton() {
         nextButton.setOnClickListener {
-            if (!validateEmail() && !validateName() && !validatePassword()) {
+            if (!validateEmail() || !validateName() || !validatePassword()) {
                 Log.e("VALIDATE_ERROR", "")
             } else viewModel.postRegistration()
         }
