@@ -10,6 +10,7 @@ import androidx.core.graphics.drawable.toDrawable
 import androidx.recyclerview.widget.RecyclerView
 import com.dxshulya.wasabi.R
 import com.dxshulya.wasabi.model.Task
+import com.google.android.material.button.MaterialButton
 
 class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -21,15 +22,6 @@ class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private var task: Task? = null
 
-    init {
-        task?.isLiked?.let {
-            taskLike.setOnClickListener {
-                task?.isLiked = true
-            }
-        }
-        Log.e("TASK_LIKE", task?.isLiked.toString())
-    }
-
     fun bind(task: Task?) {
         if (task == null) {
             taskNumber.visibility = View.GONE
@@ -37,8 +29,7 @@ class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             taskText.visibility = View.GONE
             taskAnswer.visibility = View.GONE
             taskLike.visibility = View.GONE
-        }
-        else {
+        } else {
             showTasks(task)
         }
     }
@@ -50,11 +41,16 @@ class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         taskFormula.text = task.formula
         taskText.text = task.text
         taskAnswer.text = "Ответ: " + task.answer
-
+        taskLike.setOnClickListener {
+            task.isLiked = true
+        }
         if (task.isLiked == true) {
             taskLike.setImageResource(R.drawable.ic_favorite)
+        } else {
+            task.isLiked = false
+            taskLike.setImageResource(R.drawable.ic_favorite_border)
         }
-        else taskLike.setImageResource(R.drawable.ic_favorite_border)
+        Log.e("LIKE", task.isLiked.toString())
     }
 
     companion object {
