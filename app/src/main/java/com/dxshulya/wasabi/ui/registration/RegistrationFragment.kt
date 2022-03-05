@@ -15,6 +15,7 @@ import com.dxshulya.wasabi.R
 import com.dxshulya.wasabi.databinding.RegistrationFragmentBinding
 import com.dxshulya.wasabi.util.Util.Companion.toObservable
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import io.reactivex.rxjava3.core.BackpressureStrategy
@@ -43,6 +44,8 @@ class RegistrationFragment : Fragment() {
 
     private lateinit var linkToLoginFragment: TextView
 
+    private lateinit var progressBar: CircularProgressIndicator
+
     private var compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     override fun onCreateView(
@@ -68,6 +71,7 @@ class RegistrationFragment : Fragment() {
         checkFields()
         linkToLoginFragment()
         initButton()
+        progressBar.visibility = View.GONE
     }
 
     override fun onDestroy() {
@@ -84,6 +88,7 @@ class RegistrationFragment : Fragment() {
         edtName = binding.edtName
         nextButton = binding.nextButton
         linkToLoginFragment = binding.linkToLoginFragment
+        progressBar = binding.registrationBar
     }
 
     private fun showErrorWindow(message: String) {
@@ -129,6 +134,7 @@ class RegistrationFragment : Fragment() {
         viewModel.registrationLiveData.observe(viewLifecycleOwner) {
             if (it.statusCode == 400 || it.statusCode == 401 || it.token == "") {
                 showErrorWindow(it.message.toString())
+                progressBar.visibility = View.GONE
             } else {
                 this.findNavController().navigate(R.id.action_registrationFragment_to_taskFragment)
             }
@@ -156,8 +162,11 @@ class RegistrationFragment : Fragment() {
         val validName = tilName.error == null
         val validPassword = tilPassword.error == null
 
-        if(validEmail && validName && validPassword)
+        if(validEmail && validName && validPassword) {
             viewModel.postRegistration()
+            progressBar.visibility = View.VISIBLE
+        }
+
         else invalidForm()
     }
 

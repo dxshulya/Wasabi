@@ -15,6 +15,7 @@ import com.dxshulya.wasabi.R
 import com.dxshulya.wasabi.databinding.LoginFragmentBinding
 import com.dxshulya.wasabi.util.Util.Companion.toObservable
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import io.reactivex.rxjava3.core.BackpressureStrategy
@@ -40,6 +41,8 @@ class LoginFragment : Fragment() {
 
     private lateinit var linkToRegistrationFragment: TextView
 
+    private lateinit var progressBar: CircularProgressIndicator
+
     private var compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     private fun initUIs() {
@@ -49,6 +52,7 @@ class LoginFragment : Fragment() {
         edtPassword = binding.edtPassword
         nextButton = binding.nextButton
         linkToRegistrationFragment = binding.linkToLoginFragment
+        progressBar = binding.loginBar
     }
 
     private fun initButton() {
@@ -64,8 +68,11 @@ class LoginFragment : Fragment() {
         val validEmail = tilEmail.error == null
         val validPassword = tilPassword.error == null
 
-        if(validEmail && validPassword)
+        if(validEmail && validPassword) {
             viewModel.postLogin()
+            progressBar.visibility = View.VISIBLE
+        }
+
         else invalidForm()
     }
 
@@ -158,7 +165,7 @@ class LoginFragment : Fragment() {
         viewModel.loginLiveData.observe(viewLifecycleOwner) {
             if (it.statusCode == 401 || it.statusCode == 400 || it.token == "") {
                 showErrorWindow(it.message.toString())
-                //clearStore()
+                progressBar.visibility = View.GONE
             } else {
                 toTaskFragment()
             }
@@ -194,6 +201,7 @@ class LoginFragment : Fragment() {
         checkFields()
         toRegistrationFragment()
         initButton()
+        progressBar.visibility = View.GONE
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
