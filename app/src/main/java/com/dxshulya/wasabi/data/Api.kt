@@ -40,4 +40,10 @@ interface Api {
         @Query ("count") count: Int,
         @Query ("page") page: Int,
     ): Observable<Favorites>
+
+    @DELETE("favourites/deleteFavourites")
+    fun deleteFavorite(
+        @Header("Authorization") token: String,
+        @Query ("id") id: Int,
+    ) : Observable<Authorization>
 }
