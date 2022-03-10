@@ -65,5 +65,7 @@ dependencies {
 
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
 
-    implementation "androidx.paging:paging-rxjava3:3.1.0"
+    //implementation "androidx.paging:paging-rxjava3:3.1.0"
+
+    implementation "androidx.paging:paging-runtime:3.0.0-alpha03"
 }

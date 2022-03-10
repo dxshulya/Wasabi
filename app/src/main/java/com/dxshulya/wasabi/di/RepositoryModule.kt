@@ -1,6 +1,7 @@
 package com.dxshulya.wasabi.di
 
 import android.content.Context
+import androidx.paging.ExperimentalPagingApi
 import com.dxshulya.wasabi.data.Api
 import com.dxshulya.wasabi.datastore.SharedPreference
 import com.dxshulya.wasabi.repository.TaskRepository
@@ -11,6 +12,7 @@ import javax.inject.Singleton
 @Module
 class RepositoryModule {
 
+    @ExperimentalPagingApi
     @Provides
     @Singleton
     fun provideTaskRepository(api: Api): TaskRepository {

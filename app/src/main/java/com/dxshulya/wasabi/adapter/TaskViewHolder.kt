@@ -6,12 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.graphics.drawable.toDrawable
 import androidx.recyclerview.widget.RecyclerView
 import com.dxshulya.wasabi.R
 import com.dxshulya.wasabi.model.Task
-import com.dxshulya.wasabi.ui.task.TaskViewModel
-import com.google.android.material.button.MaterialButton
 
 class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -49,14 +46,6 @@ class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         taskFormula.text = task.formula
         taskText.text = task.text
         taskAnswer.text = "Ответ: " + task.answer
-        task.isLiked = false
-        taskLike.setOnClickListener {
-            task.isLiked = true
-            taskLike.setImageResource(R.drawable.ic_favorite)
-        }
-
-        Log.e("LIKES", position.toString() + task.isLiked.toString())
-
     }
 
     companion object {

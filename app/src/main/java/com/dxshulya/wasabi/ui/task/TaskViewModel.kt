@@ -1,25 +1,24 @@
 package com.dxshulya.wasabi.ui.task
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import androidx.paging.map
 import com.dxshulya.wasabi.App
 import com.dxshulya.wasabi.datastore.SharedPreference
-import com.dxshulya.wasabi.model.Authorization
-import com.dxshulya.wasabi.model.Favorites
 import com.dxshulya.wasabi.model.Task
 import com.dxshulya.wasabi.repository.TaskRepository
-import com.google.android.material.navigation.NavigationView
-import com.google.gson.Gson
-import com.google.gson.TypeAdapter
-import retrofit2.HttpException
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
+@ExperimentalPagingApi
 class TaskViewModel : ViewModel() {
 
     init {
         App.getInstance().appComponent.inject(this)
-        getTasks()
     }
 
     @Inject
@@ -28,55 +27,9 @@ class TaskViewModel : ViewModel() {
     @Inject
     lateinit var sharedPreference: SharedPreference
 
-    private lateinit var favorites: Favorites.Favorite
-
-    private var _tasks = MutableLiveData<List<Task>>()
-    val tasks: LiveData<List<Task>>
-        get() = _tasks
-
-    private var _favorite = MutableLiveData<Authorization>()
-    val favorite: LiveData<Authorization>
-        get() = _favorite
-
-
-    fun getTasks() {
-        val count = 10
-        taskRepository.getTasks(count, 1)
-            .subscribe {
-                _tasks.value = it
-            }
+    fun getTasks(): Flow<PagingData<Task>> {
+        return taskRepository.getTasks()
+            .map { it.map { it } }
+            .cachedIn(viewModelScope)
     }
-
-    fun postFavorite() {
-        taskRepository.postFavorite(Task("1", "Это", "приложение", "мое"))
-            .subscribe({
-                _favorite.value = it
-            }, {
-                if (it is HttpException) {
-                    val body = it.response()?.errorBody()
-                    val gson = Gson()
-                    val adapter: TypeAdapter<Authorization> =
-                        gson.getAdapter(Authorization::class.java)
-                    val error: Authorization = adapter.fromJson(body?.string())
-                    _favorite.value = error
-                }
-            })
-    }
-
-    fun deleteFavorite() {
-        taskRepository.deleteFavorite(favorites.id)
-            .subscribe({
-                _favorite.value = it
-            }, {
-                if (it is HttpException) {
-                    val body = it.response()?.errorBody()
-                    val gson = Gson()
-                    val adapter: TypeAdapter<Authorization> =
-                        gson.getAdapter(Authorization::class.java)
-                    val error: Authorization = adapter.fromJson(body?.string())
-                    _favorite.value = error
-                }
-            })
-    }
-
 }

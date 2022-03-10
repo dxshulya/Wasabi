@@ -1,11 +1,11 @@
 package com.dxshulya.wasabi.adapter
 
 import android.view.ViewGroup
-import androidx.recyclerview.widget.ListAdapter
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.dxshulya.wasabi.model.Task
 
-class TaskAdapter: ListAdapter<Task, TaskViewHolder>(COMPARATOR) {
+class TaskAdapter : PagingDataAdapter<Task, TaskViewHolder>(COMPARATOR) {
 
     companion object {
         private val COMPARATOR = object : DiffUtil.ItemCallback<Task>() {

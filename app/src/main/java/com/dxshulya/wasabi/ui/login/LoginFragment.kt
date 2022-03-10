@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.paging.ExperimentalPagingApi
 import com.dxshulya.wasabi.R
 import com.dxshulya.wasabi.databinding.LoginFragmentBinding
 import com.dxshulya.wasabi.util.Util.Companion.toObservable
@@ -22,6 +23,7 @@ import io.reactivex.rxjava3.core.BackpressureStrategy
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
+@ExperimentalPagingApi
 class LoginFragment : Fragment() {
 
     companion object {

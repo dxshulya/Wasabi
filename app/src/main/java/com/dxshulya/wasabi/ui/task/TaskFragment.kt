@@ -6,16 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.ExperimentalPagingApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.dxshulya.wasabi.R
 import com.dxshulya.wasabi.adapter.TaskAdapter
 import com.dxshulya.wasabi.databinding.TaskFragmentBinding
-import com.google.android.material.navigation.NavigationBarItemView
-import com.google.android.material.navigation.NavigationView
 import com.google.android.material.progressindicator.CircularProgressIndicator
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.launch
 
+@ExperimentalPagingApi
 class TaskFragment : Fragment() {
 
     companion object {
@@ -32,6 +36,16 @@ class TaskFragment : Fragment() {
 
     private var taskAdapter = TaskAdapter()
 
+    private fun fetchTasks() {
+        taskRefresh.isRefreshing = false
+        taskBar.visibility = View.GONE
+        lifecycleScope.launch {
+            viewModel.getTasks().distinctUntilChanged().collectLatest {
+                taskAdapter.submitData(it)
+            }
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,15 +59,10 @@ class TaskFragment : Fragment() {
             adapter = taskAdapter
             layoutManager = LinearLayoutManager(context)
         }
-        viewModel.tasks.observe(viewLifecycleOwner) {
-            taskRefresh.isRefreshing = false
-            taskBar.visibility = View.GONE
-            taskAdapter.submitList(it)
-        }
+
+        fetchTasks()
         taskRefresh.setOnRefreshListener {
-            taskRefresh.isRefreshing = false
-            taskBar.visibility = View.GONE
-            viewModel.getTasks()
+            fetchTasks()
         }
         taskRefresh.setColorSchemeColors(resources.getColor(R.color.red))
         return binding.root

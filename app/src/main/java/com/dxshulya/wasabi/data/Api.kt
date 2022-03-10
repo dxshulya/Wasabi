@@ -21,10 +21,10 @@ interface Api {
 
     //Tasks
     @GET("tasks/createArrayTasks")
-    fun getTasks(
-        @Query("count") count: Int,
+    suspend fun getTasks(
         @Query("page") page: Int,
-    ): Observable<List<Task>>
+        @Query("count") count: Int,
+    ): List<Task>
 
     //Favorites
     @POST("favourites/addedFavourites")
@@ -34,8 +34,8 @@ interface Api {
 
     @GET("favourites/getAllFavourites")
     fun getFavorites(
-        @Query ("count") count: Int,
         @Query ("page") page: Int,
+        @Query ("count") count: Int,
     ): Observable<Favorites>
 
     @DELETE("favourites/deleteFavourites")

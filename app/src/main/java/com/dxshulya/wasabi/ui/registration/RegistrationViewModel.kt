@@ -3,6 +3,7 @@ package com.dxshulya.wasabi.ui.registration
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.paging.ExperimentalPagingApi
 import com.dxshulya.wasabi.App
 import com.dxshulya.wasabi.datastore.SharedPreference
 import com.dxshulya.wasabi.model.Authorization
@@ -13,6 +14,7 @@ import com.google.gson.TypeAdapter
 import retrofit2.HttpException
 import javax.inject.Inject
 
+@ExperimentalPagingApi
 class RegistrationViewModel : ViewModel() {
 
     init {

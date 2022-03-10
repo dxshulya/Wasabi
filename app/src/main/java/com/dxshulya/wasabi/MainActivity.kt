@@ -1,25 +1,23 @@
 package com.dxshulya.wasabi
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.navigation.NavigationView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.GravityCompat
-import androidx.navigation.NavController
-import androidx.navigation.NavDestination
 import com.dxshulya.wasabi.databinding.ActivityMainBinding
 import com.dxshulya.wasabi.datastore.SharedPreference
+import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedListener {
 
@@ -71,7 +69,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val currentItem = item.itemId
 
-        if (currentItem == R.id.nav_favorite){
+        if (currentItem == R.id.nav_favorite) {
             findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.nav_favorite)
         }
         return super.onOptionsItemSelected(item)

@@ -4,12 +4,14 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.paging.ExperimentalPagingApi
 import com.dxshulya.wasabi.App
 import com.dxshulya.wasabi.datastore.SharedPreference
 import com.dxshulya.wasabi.model.Favorites
 import com.dxshulya.wasabi.repository.TaskRepository
 import javax.inject.Inject
 
+@ExperimentalPagingApi
 class FavoriteViewModel : ViewModel() {
 
     init {
