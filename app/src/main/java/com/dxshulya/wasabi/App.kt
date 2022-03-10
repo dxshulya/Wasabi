@@ -1,6 +1,7 @@
 package com.dxshulya.wasabi
 
 import android.app.Application
+import com.dxshulya.wasabi.datastore.SharedPreference
 import com.dxshulya.wasabi.di.*
 
 class App: Application() {
@@ -11,8 +12,10 @@ class App: Application() {
         super.onCreate()
         app = this
 
+        val sharedPreference = SharedPreference(this)
+
         appComponent = DaggerAppComponent.builder()
-            .networkModule(NetworkModule())
+            .networkModule(NetworkModule(sharedPreference.token))
             .repositoryModule(RepositoryModule())
             .appModule(AppModule(this))
             .build()

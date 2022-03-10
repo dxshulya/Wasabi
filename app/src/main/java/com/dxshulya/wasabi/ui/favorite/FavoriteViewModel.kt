@@ -28,7 +28,7 @@ class FavoriteViewModel : ViewModel() {
         get() = _favorites
 
     fun getFavorites() {
-        taskRepository.getFavorites("Bearer " + sharedPreference.token, 10, 1)
+        taskRepository.getFavorites(10, 1)
             .subscribe({
                 _favorites.value = it.array
                 sharedPreference.totalPage = it.totalPage

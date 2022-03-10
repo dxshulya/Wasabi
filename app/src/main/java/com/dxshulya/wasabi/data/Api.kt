@@ -22,7 +22,6 @@ interface Api {
     //Tasks
     @GET("tasks/createArrayTasks")
     fun getTasks(
-        @Header("Authorization") token: String,
         @Query("count") count: Int,
         @Query("page") page: Int,
     ): Observable<List<Task>>
@@ -30,20 +29,17 @@ interface Api {
     //Favorites
     @POST("favourites/addedFavourites")
     fun postFavorite(
-        @Header("Authorization") token: String,
         @Body body: Task
     ): Observable<Authorization>
 
     @GET("favourites/getAllFavourites")
     fun getFavorites(
-        @Header("Authorization") token: String,
         @Query ("count") count: Int,
         @Query ("page") page: Int,
     ): Observable<Favorites>
 
     @DELETE("favourites/deleteFavourites")
     fun deleteFavorite(
-        @Header("Authorization") token: String,
         @Query ("id") id: Int,
     ) : Observable<Authorization>
 }

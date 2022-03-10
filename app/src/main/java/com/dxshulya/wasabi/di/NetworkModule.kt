@@ -1,6 +1,7 @@
 package com.dxshulya.wasabi.di
 
 import com.dxshulya.wasabi.data.Api
+import com.dxshulya.wasabi.token.TokenInterceptor
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -12,7 +13,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
-class NetworkModule {
+class NetworkModule(private val token: String) {
 
     @Provides
     @Singleton
@@ -24,6 +25,7 @@ class NetworkModule {
             readTimeout((60*2).toLong(), TimeUnit.SECONDS)
             connectTimeout((60*2).toLong(), TimeUnit.SECONDS)
             writeTimeout((60*2).toLong(), TimeUnit.SECONDS)
+            addInterceptor(TokenInterceptor(token))
             addInterceptor(interceptor)
         }
         return okHttpClient.build()

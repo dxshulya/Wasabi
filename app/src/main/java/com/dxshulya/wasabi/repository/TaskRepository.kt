@@ -23,26 +23,26 @@ class TaskRepository(private val api: Api) {
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun getTasks(token: String, count: Int, page: Int): Observable<List<Task>> {
-        return api.getTasks(token, count, page)
+    fun getTasks(count: Int, page: Int): Observable<List<Task>> {
+        return api.getTasks(count, page)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun postFavorite(token: String, favorite: Task): Observable<Authorization> {
-        return api.postFavorite(token, favorite)
+    fun postFavorite(favorite: Task): Observable<Authorization> {
+        return api.postFavorite(favorite)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun getFavorites(token: String, count: Int, page: Int): Observable<Favorites> {
-        return api.getFavorites(token, count, page)
+    fun getFavorites(count: Int, page: Int): Observable<Favorites> {
+        return api.getFavorites(count, page)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun deleteFavorite(token: String, id: Int): Observable<Authorization> {
-        return api.deleteFavorite(token, id)
+    fun deleteFavorite(id: Int): Observable<Authorization> {
+        return api.deleteFavorite(id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }

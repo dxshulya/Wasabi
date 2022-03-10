@@ -41,14 +41,14 @@ class TaskViewModel : ViewModel() {
 
     fun getTasks() {
         val count = 10
-        taskRepository.getTasks("Bearer " + sharedPreference.token, count, 1)
+        taskRepository.getTasks(count, 1)
             .subscribe {
                 _tasks.value = it
             }
     }
 
     fun postFavorite() {
-        taskRepository.postFavorite("Bearer " + sharedPreference.token, Task("1", "Это", "приложение", "мое"))
+        taskRepository.postFavorite(Task("1", "Это", "приложение", "мое"))
             .subscribe({
                 _favorite.value = it
             }, {
@@ -64,7 +64,7 @@ class TaskViewModel : ViewModel() {
     }
 
     fun deleteFavorite() {
-        taskRepository.deleteFavorite("Bearer " + sharedPreference.token, favorites.id)
+        taskRepository.deleteFavorite(favorites.id)
             .subscribe({
                 _favorite.value = it
             }, {
