@@ -5,6 +5,7 @@ import com.dxshulya.wasabi.model.Favorites
 import com.dxshulya.wasabi.model.Task
 import com.dxshulya.wasabi.model.User
 import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Single
 import retrofit2.http.*
 
 interface Api {
@@ -21,10 +22,10 @@ interface Api {
 
     //Tasks
     @GET("tasks/createArrayTasks")
-    suspend fun getTasks(
+    fun getTasks(
         @Query("page") page: Int,
         @Query("count") count: Int,
-    ): List<Task>
+    ): Single<List<Task>>
 
     //Favorites
     @POST("favourites/addedFavourites")

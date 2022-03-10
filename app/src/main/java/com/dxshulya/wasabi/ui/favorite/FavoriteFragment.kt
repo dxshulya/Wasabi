@@ -6,13 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.paging.ExperimentalPagingApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dxshulya.wasabi.adapter.FavoriteAdapter
 import com.dxshulya.wasabi.databinding.FavoriteFragmentBinding
 
-@ExperimentalPagingApi
 class FavoriteFragment : Fragment() {
 
     companion object {
