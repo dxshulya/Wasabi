@@ -15,7 +15,7 @@ class App: Application() {
         val sharedPreference = SharedPreference(this)
 
         appComponent = DaggerAppComponent.builder()
-            .networkModule(NetworkModule(sharedPreference.token))
+            .networkModule(NetworkModule(sharedPreference))
             .repositoryModule(RepositoryModule())
             .appModule(AppModule(this))
             .build()

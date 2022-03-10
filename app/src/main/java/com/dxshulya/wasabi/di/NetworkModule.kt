@@ -1,6 +1,7 @@
 package com.dxshulya.wasabi.di
 
 import com.dxshulya.wasabi.data.Api
+import com.dxshulya.wasabi.datastore.SharedPreference
 import com.dxshulya.wasabi.token.TokenInterceptor
 import dagger.Module
 import dagger.Provides
@@ -13,7 +14,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
-class NetworkModule(private val token: String) {
+class NetworkModule(private val sharedPreference: SharedPreference) {
 
     @Provides
     @Singleton
@@ -25,7 +26,7 @@ class NetworkModule(private val token: String) {
             readTimeout((60*2).toLong(), TimeUnit.SECONDS)
             connectTimeout((60*2).toLong(), TimeUnit.SECONDS)
             writeTimeout((60*2).toLong(), TimeUnit.SECONDS)
-            addInterceptor(TokenInterceptor(token))
+            addInterceptor(TokenInterceptor(sharedPreference))
             addInterceptor(interceptor)
         }
         return okHttpClient.build()
