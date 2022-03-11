@@ -37,10 +37,9 @@ class FavoriteFragment : Fragment() {
         favoriteRecycler.apply {
             adapter = favoriteAdapter
             layoutManager = LinearLayoutManager(context)
-            setHasFixedSize(true)
         }
         viewModel.favorites.observe(viewLifecycleOwner) {
-            favoriteAdapter.submitList(it)
+            favoriteAdapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
 
         return binding.root

@@ -7,14 +7,6 @@
     android:orientation="vertical"
     tools:context=".ui.task.TaskFragment">
 
-    <com.google.android.material.progressindicator.CircularProgressIndicator
-        android:id="@+id/task_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        app:indicatorColor="@color/red"
-        android:indeterminate="true"/>
-
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/taskRefresh"
         android:layout_width="match_parent"

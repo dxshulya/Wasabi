@@ -9,6 +9,7 @@ import com.dxshulya.wasabi.model.Authorization
 import com.dxshulya.wasabi.model.Favorites
 import com.dxshulya.wasabi.model.Task
 import com.dxshulya.wasabi.model.User
+import com.dxshulya.wasabi.paging.FavoritePagingSource
 import com.dxshulya.wasabi.paging.TaskPagingSource
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Flowable
@@ -36,6 +37,13 @@ class TaskRepository(private val api: Api) {
         ).flowable
     }
 
+    fun getFavorites(pageConfig: PagingConfig = getDefaultPageConfig()): Flowable<PagingData<Favorites.Favorite>> {
+        return Pager(
+            config = pageConfig,
+            pagingSourceFactory = {FavoritePagingSource(api)}
+        ).flowable
+    }
+
     private fun getDefaultPageConfig(): PagingConfig {
         return PagingConfig(
             pageSize = 20,
@@ -46,12 +54,6 @@ class TaskRepository(private val api: Api) {
 
     fun postFavorite(favorite: Task): Observable<Authorization> {
         return api.postFavorite(favorite)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-    }
-
-    fun getFavorites(count: Int, page: Int): Observable<Favorites> {
-        return api.getFavorites(count, page)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }

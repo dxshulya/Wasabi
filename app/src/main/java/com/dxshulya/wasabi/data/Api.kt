@@ -37,7 +37,7 @@ interface Api {
     fun getFavorites(
         @Query ("page") page: Int,
         @Query ("count") count: Int,
-    ): Observable<Favorites>
+    ): Single<Favorites>
 
     @DELETE("favourites/deleteFavourites")
     fun deleteFavorite(

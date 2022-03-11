@@ -1,11 +1,12 @@
 package com.dxshulya.wasabi.adapter
 
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.dxshulya.wasabi.model.Favorites
 
-class FavoriteAdapter: ListAdapter<Favorites.Favorite, FavoriteViewHolder>(COMPARATOR) {
+class FavoriteAdapter: PagingDataAdapter<Favorites.Favorite, FavoriteViewHolder>(COMPARATOR) {
 
     companion object {
         private val COMPARATOR = object : DiffUtil.ItemCallback<Favorites.Favorite>() {
@@ -23,6 +24,8 @@ class FavoriteAdapter: ListAdapter<Favorites.Favorite, FavoriteViewHolder>(COMPA
 
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
         val favoriteItem = getItem(position)
-        holder.bind(favoriteItem)
+        if (favoriteItem != null) {
+            holder.bind(favoriteItem)
+        }
     }
 }
