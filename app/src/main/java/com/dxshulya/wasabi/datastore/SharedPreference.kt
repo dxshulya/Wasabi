@@ -12,6 +12,7 @@ class SharedPreference(context: Context) {
         private const val IS_FIRST_RUN = "true"
         private const val TOTAL_PAGE = "page"
         private const val TOTAL_COUNT = "count"
+        private const val IS_DARK_MODE = "false"
     }
 
     private var sharedPreferences = context.getSharedPreferences("user-pref", Context.MODE_PRIVATE)
@@ -76,4 +77,9 @@ class SharedPreference(context: Context) {
         set(value) {
             setInt(TOTAL_COUNT, value)
         }
+//    var isDarkMode: Boolean
+//        get() = getBoolean(IS_DARK_MODE)
+//        set(value) {
+//            setBoolean(IS_DARK_MODE, value)
+//        }
 }

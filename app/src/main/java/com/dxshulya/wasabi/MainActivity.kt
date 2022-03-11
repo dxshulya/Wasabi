@@ -1,6 +1,7 @@
 package com.dxshulya.wasabi
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -54,6 +55,18 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         navController.addOnDestinationChangedListener(this)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        navView.menu.findItem(R.id.exit).setOnMenuItemClickListener {
+            if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                binding.drawerLayout.closeDrawer(GravityCompat.START)
+            }
+            sharedPreference.token = ""
+            sharedPreference.email = ""
+            sharedPreference.name = ""
+            sharedPreference.password = ""
+            findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.action_nav_task_to_loginFragment)
+            true
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -72,6 +85,9 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         if (currentItem == R.id.nav_favorite) {
             findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.nav_favorite)
         }
+        if (currentItem == R.id.exit) {
+            Log.e("EXIT", "CLICK")
+        }
         return super.onOptionsItemSelected(item)
     }
 
@@ -84,17 +100,12 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
             R.id.splashFragment, R.id.registrationFragment, R.id.loginFragment, R.id.introFragment -> {
                 binding.toolbar.visibility = View.GONE
             }
-            R.id.exit -> {
-//                this.findNavController(R.id.nav_host_fragment_content_main)
-//                    .navigate(R.id.action_splashFragment_to_registrationFragment)
-            }
             else -> {
                 binding.toolbar.visibility = View.VISIBLE
                 binding.labelToolbar.text = destination.label
             }
         }
     }
-
 
     override fun onBackPressed() {
         if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
