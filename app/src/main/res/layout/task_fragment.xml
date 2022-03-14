@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".ui.task.TaskFragment">
 
@@ -16,7 +15,7 @@
             android:id="@+id/taskRecycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/task_item"/>
+            tools:listitem="@layout/task_item" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         val header = navView.getHeaderView(0)
         val headerName = header.findViewById<TextView>(R.id.header_name)
         val headerEmail = header.findViewById<TextView>(R.id.header_email)
+        val themeSwitcher = header.findViewById<ImageView>(R.id.theme_switcher)
         val sharedPreference = SharedPreference(this)
 
         headerName.text = sharedPreference.name
@@ -67,6 +69,11 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
             findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.action_nav_task_to_loginFragment)
             true
         }
+
+        themeSwitcher.setOnClickListener {
+
+        }
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -84,9 +91,6 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
 
         if (currentItem == R.id.nav_favorite) {
             findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.nav_favorite)
-        }
-        if (currentItem == R.id.exit) {
-            Log.e("EXIT", "CLICK")
         }
         return super.onOptionsItemSelected(item)
     }
