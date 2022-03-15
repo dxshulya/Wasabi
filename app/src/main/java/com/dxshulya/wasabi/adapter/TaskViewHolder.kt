@@ -46,6 +46,14 @@ class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         taskFormula.text = task.formula
         taskText.text = task.text
         taskAnswer.text = "Ответ: " + task.answer
+
+        taskLike(task)
+
+        taskLike.setOnClickListener {
+            task.isLiked = true
+            taskLike(task)
+            Log.e("isLike", task.isLiked.toString())
+        }
     }
 
     companion object {
@@ -53,6 +61,15 @@ class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.task_item, parent, false)
             return TaskViewHolder(view)
+        }
+    }
+
+    fun taskLike(task: Task) {
+        if (task.isLiked) {
+            taskLike.setImageResource(R.drawable.ic_favorite)
+        }
+        else {
+            taskLike.setImageResource(R.drawable.ic_favorite_border)
         }
     }
 }

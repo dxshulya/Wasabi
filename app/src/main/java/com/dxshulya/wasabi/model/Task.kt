@@ -6,5 +6,4 @@ data class Task(
     val answer: String,
     val formula: String,
     var isLiked: Boolean = false,
-    var isUnLiked: Boolean = true,
 )

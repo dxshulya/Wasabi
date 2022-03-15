@@ -15,7 +15,7 @@ class FavoritePagingSource(private val api: Api) : RxPagingSource<Int, Favorites
     override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, Favorites.Favorite>> {
         val page = params.key ?: 1
         return api
-            .getFavorites(page, params.loadSize)
+            .getFavorites(page, 5)
             .subscribeOn(Schedulers.io())
             .map<LoadResult<Int, Favorites.Favorite>> {
                 LoadResult.Page(
