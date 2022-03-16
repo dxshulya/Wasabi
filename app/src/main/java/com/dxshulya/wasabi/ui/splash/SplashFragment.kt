@@ -3,6 +3,7 @@ package com.dxshulya.wasabi.ui.splash
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.dxshulya.wasabi.R

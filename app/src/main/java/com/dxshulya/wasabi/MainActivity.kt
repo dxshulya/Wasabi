@@ -1,5 +1,4 @@
 package com.dxshulya.wasabi
-
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -25,6 +24,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private var isPressed = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,7 +71,8 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         }
 
         themeSwitcher.setOnClickListener {
-
+            isPressed = !isPressed
+            Log.e("CHECK", isPressed.toString())
         }
 
     }

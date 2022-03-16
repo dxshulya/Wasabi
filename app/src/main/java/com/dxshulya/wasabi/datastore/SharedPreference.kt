@@ -77,9 +77,9 @@ class SharedPreference(context: Context) {
         set(value) {
             setInt(TOTAL_COUNT, value)
         }
-//    var isDarkMode: Boolean
-//        get() = getBoolean(IS_DARK_MODE)
-//        set(value) {
-//            setBoolean(IS_DARK_MODE, value)
-//        }
+    var isDarkMode: Boolean
+        get() = getBoolean(IS_DARK_MODE)
+        set(value) {
+            setBoolean(IS_DARK_MODE, value)
+        }
 }

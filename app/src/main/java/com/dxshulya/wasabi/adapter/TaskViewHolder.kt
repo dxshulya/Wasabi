@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
 import com.dxshulya.wasabi.R
 import com.dxshulya.wasabi.model.Task
+import com.dxshulya.wasabi.ui.task.TaskViewModel
 
 class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -19,14 +21,6 @@ class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val taskLike: ImageView = view.findViewById(R.id.task_like)
 
     private var task: Task? = null
-
-    init {
-        view.setOnClickListener {
-            taskLike.setOnClickListener {
-                Log.e("INIT", position.toString())
-            }
-        }
-    }
 
     fun bind(task: Task?) {
         if (task == null) {
@@ -64,7 +58,7 @@ class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         }
     }
 
-    fun taskLike(task: Task) {
+    private fun taskLike(task: Task) {
         if (task.isLiked) {
             taskLike.setImageResource(R.drawable.ic_favorite)
         }
