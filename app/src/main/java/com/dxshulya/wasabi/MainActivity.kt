@@ -1,4 +1,5 @@
 package com.dxshulya.wasabi
+import android.app.UiModeManager
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -7,6 +8,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -19,12 +21,12 @@ import androidx.navigation.ui.setupWithNavController
 import com.dxshulya.wasabi.databinding.ActivityMainBinding
 import com.dxshulya.wasabi.datastore.SharedPreference
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.switchmaterial.SwitchMaterial
 
 class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedListener {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
-    private var isPressed = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,8 +44,21 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         val header = navView.getHeaderView(0)
         val headerName = header.findViewById<TextView>(R.id.header_name)
         val headerEmail = header.findViewById<TextView>(R.id.header_email)
-        val themeSwitcher = header.findViewById<ImageView>(R.id.theme_switcher)
+        val themeSwitcher = header.findViewById<SwitchMaterial>(R.id.theme_switcher)
         val sharedPreference = SharedPreference(this)
+
+        themeSwitcher.setOnCheckedChangeListener { _, _ ->
+            if(themeSwitcher.isChecked) {
+                themeSwitcher.thumbDrawable = getDrawable(R.drawable.ic_light_mode)
+                sharedPreference.isDarkMode = true
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+            else {
+                themeSwitcher.thumbDrawable = getDrawable(R.drawable.ic_dark_mode)
+                sharedPreference.isDarkMode = false
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
 
         headerName.text = sharedPreference.name
         headerEmail.text = sharedPreference.email
@@ -69,12 +84,6 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
             findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.action_nav_task_to_loginFragment)
             true
         }
-
-        themeSwitcher.setOnClickListener {
-            isPressed = !isPressed
-            Log.e("CHECK", isPressed.toString())
-        }
-
     }
 
     override fun onSupportNavigateUp(): Boolean {
