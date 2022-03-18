@@ -34,6 +34,10 @@ class SharedPreference(context: Context) {
         return sharedPreferences.getBoolean(key, defaultValue)
     }
 
+    private fun getBooleanTheme(key: String, defaultValue: Boolean = false): Boolean {
+        return sharedPreferences.getBoolean(key, defaultValue)
+    }
+
     private fun setInt(key: String, value: Int) {
         sharedPreferencesEditor.putInt(key, value).apply()
     }
@@ -78,7 +82,7 @@ class SharedPreference(context: Context) {
             setInt(TOTAL_COUNT, value)
         }
     var isDarkMode: Boolean
-        get() = getBoolean(IS_DARK_MODE)
+        get() = getBooleanTheme(IS_DARK_MODE)
         set(value) {
             setBoolean(IS_DARK_MODE, value)
         }

@@ -1,16 +1,13 @@
 package com.dxshulya.wasabi.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
 import com.dxshulya.wasabi.R
 import com.dxshulya.wasabi.model.Task
-import com.dxshulya.wasabi.ui.task.TaskViewModel
 
 class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -41,12 +38,11 @@ class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         taskText.text = task.text
         taskAnswer.text = "Ответ: " + task.answer
 
-        taskLike(task)
+        showTaskLike(task)
 
         taskLike.setOnClickListener {
             task.isLiked = true
-            taskLike(task)
-            Log.e("isLike", task.isLiked.toString())
+            showTaskLike(task)
         }
     }
 
@@ -58,11 +54,10 @@ class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         }
     }
 
-    private fun taskLike(task: Task) {
+    private fun showTaskLike(task: Task) {
         if (task.isLiked) {
             taskLike.setImageResource(R.drawable.ic_favorite)
-        }
-        else {
+        } else {
             taskLike.setImageResource(R.drawable.ic_favorite_border)
         }
     }

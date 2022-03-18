@@ -9,6 +9,7 @@ data class Favorites(
         val id: Int,
         val formula: String,
         val text: String,
-        val answer: String
+        val answer: String,
+        var isDisliked: Boolean = false
     )
 }
