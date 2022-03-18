@@ -1,9 +1,6 @@
 package com.dxshulya.wasabi.data
 
-import com.dxshulya.wasabi.model.Authorization
-import com.dxshulya.wasabi.model.Favorites
-import com.dxshulya.wasabi.model.Task
-import com.dxshulya.wasabi.model.User
+import com.dxshulya.wasabi.model.*
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.*
@@ -43,4 +40,7 @@ interface Api {
     fun deleteFavorite(
         @Query ("id") id: Int,
     ) : Observable<Authorization>
+
+    @GET("favourites/getTotalCountFavourites")
+    fun getTotalCountFavorites(): Observable<TotalCount>
 }

@@ -71,11 +71,6 @@ class SharedPreference(context: Context) {
         set(value) {
             setBoolean(IS_FIRST_RUN, value)
         }
-    var totalPage: Int
-        get() = getInt(TOTAL_PAGE)
-        set(value) {
-            setInt(TOTAL_PAGE, value)
-        }
     var totalCount: Int
         get() = getInt(TOTAL_COUNT)
         set(value) {

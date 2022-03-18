@@ -17,13 +17,5 @@ class TokenInterceptor(private val sharedPreference: SharedPreference) : Interce
         }
 
         return chain.proceed(builder.build())
-
-
-//        val original = chain.request()
-//        val requestBuilder = original.newBuilder()
-//            .header("Authorization", "Bearer $token")
-//            .method(original.method, original.body)
-//            .build()
-//        return chain.proceed(requestBuilder)
     }
 }

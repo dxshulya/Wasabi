@@ -2,6 +2,7 @@ package com.dxshulya.wasabi.ui.splash
 
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
@@ -32,6 +33,7 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
                     findNavController().navigate(R.id.action_splashFragment_to_registrationFragment)
                 }
             }
+            Log.e("COUNT", sharedPreference.totalCount.toString())
         }, 2000)
     }
 }

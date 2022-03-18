@@ -1,5 +1,6 @@
 package com.dxshulya.wasabi.ui.task
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,6 +11,7 @@ import com.dxshulya.wasabi.App
 import com.dxshulya.wasabi.datastore.SharedPreference
 import com.dxshulya.wasabi.model.Authorization
 import com.dxshulya.wasabi.model.Task
+import com.dxshulya.wasabi.model.TotalCount
 import com.dxshulya.wasabi.repository.TaskRepository
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter
@@ -22,6 +24,7 @@ class TaskViewModel : ViewModel() {
     init {
         App.getInstance().appComponent.inject(this)
         getTasks()
+        getTotalCount()
     }
 
     private var _tasks = MutableLiveData<PagingData<Task>>()
@@ -63,6 +66,16 @@ class TaskViewModel : ViewModel() {
                     val error: Authorization = adapter.fromJson(body?.string())
                     _favoriteLiveData.value = error
                 }
+            })
+    }
+
+    private fun getTotalCount() {
+        taskRepository.getTotalCount()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                sharedPreference.totalCount = it.totalCount
+            }, {
+                Log.e("TOTAL_COUNT", it.message.toString())
             })
     }
 }
