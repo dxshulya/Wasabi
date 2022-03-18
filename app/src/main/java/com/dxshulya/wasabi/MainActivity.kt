@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private lateinit var badgeCounter: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,6 +95,19 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
+        val sharedPreference = SharedPreference(this)
+        val counterFavorites = menu.findItem(R.id.nav_favorite)
+
+        if (sharedPreference.totalCount == 0) {
+           counterFavorites.actionView = null
+        }
+        else {
+            counterFavorites.setActionView(R.layout.custom_badge_layout)
+            val view = counterFavorites.actionView
+            badgeCounter = view.findViewById(R.id.badge_counter)
+            badgeCounter.text = sharedPreference.totalCount.toString()
+        }
+
         return true
     }
 
