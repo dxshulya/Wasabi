@@ -1,6 +1,7 @@
 package com.dxshulya.wasabi
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -21,7 +22,8 @@ import com.dxshulya.wasabi.datastore.SharedPreference
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.switchmaterial.SwitchMaterial
 
-class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedListener {
+class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedListener,
+    DrawerLayout.DrawerListener {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
@@ -45,6 +47,9 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         val themeSwitcher = header.findViewById<SwitchMaterial>(R.id.theme_switcher)
         val sharedPreference = SharedPreference(this)
 
+        headerName.text = sharedPreference.name
+        headerEmail.text = sharedPreference.email
+
         themeSwitcher.isChecked = sharedPreference.isDarkMode
 
         themeSwitcher.setOnCheckedChangeListener { _, _ ->
@@ -57,9 +62,6 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
             }
         }
 
-        headerName.text = sharedPreference.name
-        headerEmail.text = sharedPreference.email
-
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_task, R.id.nav_favorite, R.id.exit
@@ -67,6 +69,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         )
 
         navController.addOnDestinationChangedListener(this)
+        drawerLayout.addDrawerListener(this)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
@@ -125,5 +128,27 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         } else {
             super.onBackPressed()
         }
+    }
+
+    override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
+        val sharedPreference = SharedPreference(this)
+        val navView: NavigationView = binding.navView
+        val header = navView.getHeaderView(0)
+        val headerName = header.findViewById<TextView>(R.id.header_name)
+        val headerEmail = header.findViewById<TextView>(R.id.header_email)
+        headerName.text = sharedPreference.name
+        headerEmail.text = sharedPreference.email
+    }
+
+    override fun onDrawerOpened(drawerView: View) {
+        Log.i("OPEN", "1")
+    }
+
+    override fun onDrawerClosed(drawerView: View) {
+        Log.i("CLOSE", "1")
+    }
+
+    override fun onDrawerStateChanged(newState: Int) {
+        Log.i("STATE", "1")
     }
 }
