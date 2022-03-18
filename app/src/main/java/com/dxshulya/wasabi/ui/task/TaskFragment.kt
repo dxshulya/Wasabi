@@ -12,6 +12,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.dxshulya.wasabi.R
 import com.dxshulya.wasabi.adapter.TaskAdapter
 import com.dxshulya.wasabi.databinding.TaskFragmentBinding
+import com.google.android.material.progressindicator.CircularProgressIndicator
 
 class TaskFragment : Fragment() {
 
@@ -25,6 +26,7 @@ class TaskFragment : Fragment() {
 
     private lateinit var taskRefresh: SwipeRefreshLayout
     private lateinit var taskRecycler: RecyclerView
+    private lateinit var taskBar: CircularProgressIndicator
 
     private var taskAdapter = TaskAdapter()
 
@@ -35,6 +37,7 @@ class TaskFragment : Fragment() {
         binding = TaskFragmentBinding.inflate(inflater, container, false)
 
         initUis()
+        taskBar.visibility = View.VISIBLE
 
         taskRecycler.apply {
             adapter = taskAdapter
@@ -43,11 +46,13 @@ class TaskFragment : Fragment() {
 
         viewModel.tasks.observe(viewLifecycleOwner) {
             taskRefresh.isRefreshing = false
+            taskBar.visibility = View.GONE
             taskAdapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
 
         taskRefresh.setOnRefreshListener {
             taskRefresh.isRefreshing = false
+            taskBar.visibility = View.GONE
             viewModel.getTasks()
         }
         taskRefresh.setColorSchemeColors(resources.getColor(R.color.red))
@@ -62,5 +67,6 @@ class TaskFragment : Fragment() {
     private fun initUis() {
         taskRefresh = binding.taskRefresh
         taskRecycler = binding.taskRecycler
+        taskBar = binding.taskBar
     }
 }
