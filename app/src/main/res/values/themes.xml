@@ -23,4 +23,10 @@
     <style name="Theme.Wasabi.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Wasabi.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="MyThemeSwitcher" parent="Widget.Material3.CompoundButton.Switch">
+        <item name="trackTint">@color/theme_selector_track</item>
+        <item name="android:thumb">@drawable/theme_selector</item>
+        <item name="thumbTint">@color/theme_selector_thumb</item>
+    </style>
 </resources>

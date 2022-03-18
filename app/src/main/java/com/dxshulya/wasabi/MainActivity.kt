@@ -1,11 +1,9 @@
 package com.dxshulya.wasabi
-import android.app.UiModeManager
+
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -47,14 +45,13 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         val themeSwitcher = header.findViewById<SwitchMaterial>(R.id.theme_switcher)
         val sharedPreference = SharedPreference(this)
 
+        themeSwitcher.isChecked = sharedPreference.isDarkMode
+
         themeSwitcher.setOnCheckedChangeListener { _, _ ->
-            if(themeSwitcher.isChecked) {
-                themeSwitcher.thumbDrawable = getDrawable(R.drawable.ic_light_mode)
+            if (themeSwitcher.isChecked) {
                 sharedPreference.isDarkMode = true
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            }
-            else {
-                themeSwitcher.thumbDrawable = getDrawable(R.drawable.ic_dark_mode)
+            } else {
                 sharedPreference.isDarkMode = false
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
