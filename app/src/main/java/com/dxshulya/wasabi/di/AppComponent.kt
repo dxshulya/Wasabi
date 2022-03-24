@@ -2,6 +2,7 @@ package com.dxshulya.wasabi.di
 
 import com.dxshulya.wasabi.repository.TaskRepository
 import com.dxshulya.wasabi.ui.favorite.FavoriteViewModel
+import com.dxshulya.wasabi.ui.item.TaskItemViewModel
 import com.dxshulya.wasabi.ui.login.LoginViewModel
 import com.dxshulya.wasabi.ui.registration.RegistrationViewModel
 import com.dxshulya.wasabi.ui.task.TaskViewModel
@@ -16,4 +17,5 @@ interface AppComponent {
     fun inject(registrationViewModel: RegistrationViewModel)
     fun inject(loginViewModel: LoginViewModel)
     fun inject(favoriteViewModel: FavoriteViewModel)
+    fun inject(taskItemViewModel: TaskItemViewModel)
 }

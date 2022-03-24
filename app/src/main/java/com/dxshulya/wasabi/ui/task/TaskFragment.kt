@@ -27,7 +27,7 @@ class TaskFragment : Fragment() {
     private lateinit var taskRefresh: SwipeRefreshLayout
     private lateinit var taskRecycler: RecyclerView
 
-    private var taskAdapter = TaskAdapter()
+    private var taskAdapter: TaskAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,13 +38,13 @@ class TaskFragment : Fragment() {
         initUis()
 
         taskRecycler.apply {
-            adapter = taskAdapter
+            adapter = TaskAdapter(viewLifecycleOwner).also { taskAdapter = it }
             layoutManager = LinearLayoutManager(context)
         }
 
         viewModel.tasks.observe(viewLifecycleOwner) {
             taskRefresh.isRefreshing = false
-            taskAdapter.submitData(viewLifecycleOwner.lifecycle, it)
+            taskAdapter?.submitData(viewLifecycleOwner.lifecycle, it)
         }
 
         taskRefresh.setOnRefreshListener {
