@@ -1,66 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardCornerRadius="5dp"
-    app:cardElevation="3dp"
-    android:layout_margin="4dp"
-    android:id="@+id/card_view2">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout
+    <data>
+        <variable
+            name="viewModel"
+            type="com.dxshulya.wasabi.ui.item.FavoriteItemViewModel" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_view2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp">
+        android:layout_margin="4dp"
+        app:cardCornerRadius="5dp">
 
-        <TextView
-            android:id="@+id/favorite_number"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/task_number"
-            android:textSize="14sp"
-            android:layout_margin="6dp"
-            android:layout_alignParentStart="true"/>
+            android:layout_margin="10dp">
 
-        <TextView
-            android:id="@+id/favorite_formula"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/task_formula"
-            android:textSize="14sp"
-            android:layout_margin="6dp"
-            android:layout_alignParentStart="true"
-            android:layout_below="@id/favorite_number"/>
+            <TextView
+                android:id="@+id/favorite_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_margin="6dp"
+                android:text="@string/task_number"
+                android:textSize="14sp" />
 
-        <TextView
-            android:id="@+id/favorite_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/task_text"
-            android:textSize="14sp"
-            android:layout_margin="6dp"
-            android:layout_alignParentStart="true"
-            android:layout_below="@id/favorite_formula"/>
+            <TextView
+                android:id="@+id/favorite_formula"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/favorite_number"
+                android:layout_alignParentStart="true"
+                android:layout_margin="6dp"
+                android:text="@string/task_formula"
+                android:textSize="14sp" />
 
-        <TextView
-            android:id="@+id/favorite_answer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/task_answer"
-            android:textSize="14sp"
-            android:layout_margin="6dp"
-            android:layout_alignParentStart="true"
-            android:layout_below="@id/favorite_text"/>
+            <TextView
+                android:id="@+id/favorite_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/favorite_formula"
+                android:layout_alignParentStart="true"
+                android:layout_margin="6dp"
+                android:text="@string/task_text"
+                android:textSize="14sp" />
 
-        <ImageView
-            android:id="@+id/favorite_like"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_favorite"
-            app:tint="@color/red"
-            android:layout_margin="6dp"
-            android:layout_alignParentEnd="true"/>
+            <TextView
+                android:id="@+id/favorite_answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/favorite_text"
+                android:layout_alignParentStart="true"
+                android:layout_margin="6dp"
+                android:text="@string/task_answer"
+                android:textSize="14sp" />
 
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/favorite_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="6dp"
+                android:src="@drawable/ic_favorite"
+                app:tint="@color/red"
+                android:onClick="@{() -> viewModel.deleteFavorite()}"/>
 
-</androidx.cardview.widget.CardView>
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

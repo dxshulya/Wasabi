@@ -55,7 +55,7 @@ class TaskRepository(private val api: Api) {
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun deleteFavorite(id: Int): Observable<Authorization> {
+    fun deleteFavorite(id: String): Observable<Authorization> {
         return api.deleteFavorite(id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

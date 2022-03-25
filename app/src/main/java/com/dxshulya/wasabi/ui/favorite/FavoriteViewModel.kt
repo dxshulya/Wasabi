@@ -30,7 +30,7 @@ class FavoriteViewModel : ViewModel() {
     val favorites: LiveData<PagingData<Favorites.Favorite>>
         get() = _favorites
 
-    private fun getFavorites() {
+    fun getFavorites() {
         taskRepository.getFavorites()
             .observeOn(AndroidSchedulers.mainThread())
             .map { it }

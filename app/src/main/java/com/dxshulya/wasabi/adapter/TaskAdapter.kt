@@ -1,8 +1,6 @@
 package com.dxshulya.wasabi.adapter
 
-import android.R.attr.data
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -14,7 +12,6 @@ import com.dxshulya.wasabi.R
 import com.dxshulya.wasabi.databinding.TaskItemBinding
 import com.dxshulya.wasabi.model.Task
 import com.dxshulya.wasabi.ui.item.TaskItemViewModel
-import com.google.android.material.internal.ContextUtils.getActivity
 
 
 class TaskAdapter(private val fragmentLifecycleOwner: LifecycleOwner) :

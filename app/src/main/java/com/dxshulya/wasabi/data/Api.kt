@@ -38,7 +38,7 @@ interface Api {
 
     @DELETE("favourites/deleteFavourites")
     fun deleteFavorite(
-        @Query ("id") id: Int,
+        @Query ("id") id: String,
     ) : Observable<Authorization>
 
     @GET("favourites/getTotalCountFavourites")
