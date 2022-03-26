@@ -7,7 +7,6 @@ import com.dxshulya.wasabi.App
 import com.dxshulya.wasabi.datastore.SharedPreference
 import com.dxshulya.wasabi.model.Authorization
 import com.dxshulya.wasabi.model.Favorites
-import com.dxshulya.wasabi.model.Task
 import com.dxshulya.wasabi.repository.TaskRepository
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter

@@ -9,14 +9,9 @@ import androidx.paging.PagingData
 import androidx.paging.rxjava3.cachedIn
 import com.dxshulya.wasabi.App
 import com.dxshulya.wasabi.datastore.SharedPreference
-import com.dxshulya.wasabi.model.Authorization
 import com.dxshulya.wasabi.model.Task
-import com.dxshulya.wasabi.model.TotalCount
 import com.dxshulya.wasabi.repository.TaskRepository
-import com.google.gson.Gson
-import com.google.gson.TypeAdapter
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import retrofit2.HttpException
 import javax.inject.Inject
 
 class TaskViewModel : ViewModel() {

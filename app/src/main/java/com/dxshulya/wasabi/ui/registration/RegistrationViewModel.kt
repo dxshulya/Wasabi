@@ -1,6 +1,5 @@
 package com.dxshulya.wasabi.ui.registration
 
-import android.content.res.Resources
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
