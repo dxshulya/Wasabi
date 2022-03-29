@@ -60,6 +60,7 @@ class FavoriteAdapter(private val fragmentLifecycleOwner: LifecycleOwner) :
                         binding.root.context, it.message.toString(),
                         Toast.LENGTH_SHORT
                     ).show()
+                    binding.favoriteLike.isClickable = false
                 }
             }
             with(binding) {

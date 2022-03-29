@@ -1,5 +1,6 @@
 package com.dxshulya.wasabi.di
 
+import com.dxshulya.wasabi.MainActivityViewModel
 import com.dxshulya.wasabi.repository.TaskRepository
 import com.dxshulya.wasabi.ui.favorite.FavoriteViewModel
 import com.dxshulya.wasabi.ui.item.FavoriteItemViewModel
@@ -20,4 +21,5 @@ interface AppComponent {
     fun inject(favoriteViewModel: FavoriteViewModel)
     fun inject(taskItemViewModel: TaskItemViewModel)
     fun inject(favoriteItemViewModel: FavoriteItemViewModel)
+    fun inject (mainActivityViewModel: MainActivityViewModel)
 }

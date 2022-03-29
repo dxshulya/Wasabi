@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
@@ -22,15 +23,19 @@ import com.dxshulya.wasabi.datastore.SharedPreference
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.switchmaterial.SwitchMaterial
 
+
 class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedListener,
     DrawerLayout.DrawerListener {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     private lateinit var badgeCounter: TextView
+    private lateinit var mainActivityViewModel: MainActivityViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        mainActivityViewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -48,17 +53,19 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         val themeSwitcher = header.findViewById<SwitchMaterial>(R.id.theme_switcher)
         val sharedPreference = SharedPreference(this)
 
-        headerName.text = sharedPreference.name
-        headerEmail.text = sharedPreference.email
+        headerName.text = mainActivityViewModel.setNameOnHeader()
+        headerEmail.text = mainActivityViewModel.setEmailOnHeader()
 
-        themeSwitcher.isChecked = sharedPreference.isDarkMode
+        themeSwitcher.isChecked = mainActivityViewModel.isNightMode()
 
         themeSwitcher.setOnCheckedChangeListener { _, _ ->
             if (themeSwitcher.isChecked) {
-                sharedPreference.isDarkMode = true
+                mainActivityViewModel.changeMode(true)
+                //sharedPreference.isDarkMode = true
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             } else {
-                sharedPreference.isDarkMode = false
+                mainActivityViewModel.changeMode(false)
+                //sharedPreference.isDarkMode = false
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
         }
@@ -95,17 +102,16 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
-        val sharedPreference = SharedPreference(this)
         val counterFavorites = menu.findItem(R.id.nav_favorite)
 
-        if (sharedPreference.totalCount == 0) {
+        if (mainActivityViewModel.setBadgeCount() == 0) {
            counterFavorites.actionView = null
         }
         else {
             counterFavorites.setActionView(R.layout.custom_badge_layout)
             val view = counterFavorites.actionView
             badgeCounter = view.findViewById(R.id.badge_counter)
-            badgeCounter.text = sharedPreference.totalCount.toString()
+            badgeCounter.text = mainActivityViewModel.setBadgeCount().toString()
         }
 
         return true
@@ -145,13 +151,12 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
     }
 
     override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
-        val sharedPreference = SharedPreference(this)
         val navView: NavigationView = binding.navView
         val header = navView.getHeaderView(0)
         val headerName = header.findViewById<TextView>(R.id.header_name)
         val headerEmail = header.findViewById<TextView>(R.id.header_email)
-        headerName.text = sharedPreference.name
-        headerEmail.text = sharedPreference.email
+        headerName.text = mainActivityViewModel.setNameOnHeader()
+        headerEmail.text = mainActivityViewModel.setEmailOnHeader()
     }
 
     override fun onDrawerOpened(drawerView: View) {

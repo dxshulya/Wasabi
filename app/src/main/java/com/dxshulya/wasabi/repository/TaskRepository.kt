@@ -11,6 +11,7 @@ import com.dxshulya.wasabi.paging.TaskPagingSource
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 class TaskRepository(private val api: Api) {
@@ -45,7 +46,7 @@ class TaskRepository(private val api: Api) {
         return PagingConfig(
             pageSize = 20,
             initialLoadSize = 10,
-            enablePlaceholders = true
+            enablePlaceholders = false
         )
     }
 

@@ -56,13 +56,19 @@ class TaskAdapter(private val fragmentLifecycleOwner: LifecycleOwner) :
                         binding.root.context, it.message.toString(),
                         Toast.LENGTH_SHORT
                     ).show()
+                    binding.taskLike.isClickable = false
                 }
             }
             with(binding) {
+                showAnswer(task)
                 taskNumber.text = "№ " + (position + 1)
                 taskFormula.text = task.formula
                 taskText.text = task.text
-                taskAnswer.text = "Ответ: " + task.answer
+                //taskAnswer.text = "Ответ: " + task.answer
+                taskAnswer.setOnClickListener {
+                    task.isShowAnswer = true
+                    showAnswer(task)
+                }
             }
         }
 
@@ -72,6 +78,13 @@ class TaskAdapter(private val fragmentLifecycleOwner: LifecycleOwner) :
             } else {
                 binding.taskLike.setImageResource(R.drawable.ic_favorite_border)
             }
+        }
+        @SuppressLint("SetTextI18n")
+        private fun showAnswer(task: Task) {
+            if (task.isShowAnswer) {
+                binding.taskAnswer.text = "Ответ: " + task.answer
+            }
+            else binding.taskAnswer.text = "Показать ответ"
         }
     }
 }
