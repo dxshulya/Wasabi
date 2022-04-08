@@ -2,12 +2,13 @@ package com.dxshulya.wasabi.util
 
 import android.text.Editable
 import android.text.TextWatcher
+import androidx.lifecycle.LifecycleOwner
 import com.google.android.material.textfield.TextInputEditText
 import io.reactivex.rxjava3.core.Observable
 import java.util.concurrent.TimeUnit
 
 class Util {
-    companion object{
+    companion object {
         fun toObservable(editText: TextInputEditText): Observable<String> {
             val observable = Observable.create<String> { emitter ->
                 val textWatcher = object : TextWatcher {

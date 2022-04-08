@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
@@ -51,21 +52,18 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         val headerName = header.findViewById<TextView>(R.id.header_name)
         val headerEmail = header.findViewById<TextView>(R.id.header_email)
         val themeSwitcher = header.findViewById<SwitchMaterial>(R.id.theme_switcher)
-        val sharedPreference = SharedPreference(this)
 
-        headerName.text = mainActivityViewModel.setNameOnHeader()
-        headerEmail.text = mainActivityViewModel.setEmailOnHeader()
+        headerName.text = mainActivityViewModel.sharedPreference.name
+        headerEmail.text = mainActivityViewModel.sharedPreference.email
 
-        themeSwitcher.isChecked = mainActivityViewModel.isNightMode()
+        themeSwitcher.isChecked = mainActivityViewModel.sharedPreference.isDarkMode
 
         themeSwitcher.setOnCheckedChangeListener { _, _ ->
             if (themeSwitcher.isChecked) {
                 mainActivityViewModel.changeMode(true)
-                //sharedPreference.isDarkMode = true
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             } else {
                 mainActivityViewModel.changeMode(false)
-                //sharedPreference.isDarkMode = false
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
         }
@@ -86,11 +84,11 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
             if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
                 binding.drawerLayout.closeDrawer(GravityCompat.START)
             }
-            sharedPreference.token = ""
-            sharedPreference.email = ""
-            sharedPreference.name = ""
-            sharedPreference.password = ""
-            findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.action_nav_task_to_loginFragment)
+            mainActivityViewModel.sharedPreference.token = ""
+            mainActivityViewModel.sharedPreference.email = ""
+            mainActivityViewModel.sharedPreference.name = ""
+            mainActivityViewModel.sharedPreference.password = ""
+            findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.loginFragment)
             true
         }
     }
@@ -104,14 +102,17 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         menuInflater.inflate(R.menu.main_menu, menu)
         val counterFavorites = menu.findItem(R.id.nav_favorite)
 
-        if (mainActivityViewModel.setBadgeCount() == 0) {
+        if (mainActivityViewModel.sharedPreference.totalCount == 0) {
            counterFavorites.actionView = null
         }
         else {
             counterFavorites.setActionView(R.layout.custom_badge_layout)
             val view = counterFavorites.actionView
             badgeCounter = view.findViewById(R.id.badge_counter)
-            badgeCounter.text = mainActivityViewModel.setBadgeCount().toString()
+            mainActivityViewModel.countLiveData.observe(this, Observer { t ->
+                mainActivityViewModel.getTotalCount()
+                badgeCounter.text = t.totalCount.toString()
+            })
         }
 
         return true
@@ -155,8 +156,8 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         val header = navView.getHeaderView(0)
         val headerName = header.findViewById<TextView>(R.id.header_name)
         val headerEmail = header.findViewById<TextView>(R.id.header_email)
-        headerName.text = mainActivityViewModel.setNameOnHeader()
-        headerEmail.text = mainActivityViewModel.setEmailOnHeader()
+        headerName.text = mainActivityViewModel.sharedPreference.name
+        headerEmail.text = mainActivityViewModel.sharedPreference.email
     }
 
     override fun onDrawerOpened(drawerView: View) {

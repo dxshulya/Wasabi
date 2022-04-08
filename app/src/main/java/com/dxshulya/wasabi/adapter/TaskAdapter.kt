@@ -1,6 +1,7 @@
 package com.dxshulya.wasabi.adapter
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -52,11 +53,7 @@ class TaskAdapter(private val fragmentLifecycleOwner: LifecycleOwner) :
                 this.favoriteLiveData.observe(fragmentLifecycleOwner) {
                     task.isLiked = true
                     showLikes(task)
-                    Toast.makeText(
-                        binding.root.context, it.message.toString(),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    binding.taskLike.isClickable = false
+                    //binding.taskLike.isClickable = false
                 }
             }
             with(binding) {
@@ -64,7 +61,6 @@ class TaskAdapter(private val fragmentLifecycleOwner: LifecycleOwner) :
                 taskNumber.text = "№ " + (position + 1)
                 taskFormula.text = task.formula
                 taskText.text = task.text
-                //taskAnswer.text = "Ответ: " + task.answer
                 taskAnswer.setOnClickListener {
                     task.isShowAnswer = true
                     showAnswer(task)
