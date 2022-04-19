@@ -2,8 +2,8 @@ package com.dxshulya.wasabi.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.LifecycleOwner
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -69,6 +69,8 @@ class FavoriteAdapter(private val fragmentLifecycleOwner: LifecycleOwner) :
         private fun showDislikes(favorite: Favorites.Favorite) {
             if (favorite.isDisliked) {
                 binding.favoriteLike.setImageResource(R.drawable.ic_favorite_border)
+//                notifyItemRemoved(position)
+//                notifyItemRangeChanged (position, itemCount)
             } else binding.favoriteLike.setImageResource(R.drawable.ic_favorite)
         }
     }
