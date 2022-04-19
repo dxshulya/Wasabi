@@ -15,7 +15,7 @@ class MainActivityViewModel : ViewModel() {
 
     init {
         App.getInstance().appComponent.inject(this)
-        getTotalCount()
+        //getTotalCount()
     }
 
     private var _countLiveData = MutableLiveData<TotalCount>()
