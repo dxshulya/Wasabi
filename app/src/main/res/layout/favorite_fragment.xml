@@ -6,10 +6,17 @@
     android:orientation="vertical"
     tools:context=".ui.favorite.FavoriteFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/favouriteRecycler"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/favoriteRefresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/favorite_item" />
+        android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/favouriteRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/favorite_item" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

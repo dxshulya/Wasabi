@@ -51,9 +51,7 @@ class TaskAdapter(private val fragmentLifecycleOwner: LifecycleOwner) :
             binding.viewModel = TaskItemViewModel(task).apply {
                 showLikes(task)
                 this.favoriteLiveData.observe(fragmentLifecycleOwner) {
-                    task.isLiked = true
                     showLikes(task)
-                    //binding.taskLike.isClickable = false
                 }
             }
             with(binding) {

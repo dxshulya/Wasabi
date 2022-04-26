@@ -20,6 +20,8 @@ class TaskItemViewModel(private val task: Task) : ViewModel() {
         App.getInstance().appComponent.inject(this)
     }
 
+    var isPressed = false
+
     @Inject
     lateinit var taskRepository: TaskRepository
 
@@ -30,20 +32,41 @@ class TaskItemViewModel(private val task: Task) : ViewModel() {
     val favoriteLiveData: LiveData<Authorization>
         get() = _favoriteLiveData
 
-    fun postFavorite() {
-        taskRepository.postFavorite(task)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                _favoriteLiveData.value = it
-            }, {
-                if (it is HttpException) {
-                    val body = it.response()?.errorBody()
-                    val gson = Gson()
-                    val adapter: TypeAdapter<Authorization> =
-                        gson.getAdapter(Authorization::class.java)
-                    val error: Authorization = adapter.fromJson(body?.string())
-                    _favoriteLiveData.value = error
-                }
-            })
+    fun postOrDeleteFavorite() {
+        isPressed = !isPressed
+        task.isLiked = isPressed
+
+        if (isPressed){
+            taskRepository.postFavorite(task)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    _favoriteLiveData.value = it
+                }, {
+                    if (it is HttpException) {
+                        val body = it.response()?.errorBody()
+                        val gson = Gson()
+                        val adapter: TypeAdapter<Authorization> =
+                            gson.getAdapter(Authorization::class.java)
+                        val error: Authorization = adapter.fromJson(body?.string())
+                        _favoriteLiveData.value = error
+                    }
+                })
+        }
+        else if (!isPressed) {
+            taskRepository.deleteFavorite(task.id)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    _favoriteLiveData.value = it
+                }, {
+                    if (it is HttpException) {
+                        val body = it.response()?.errorBody()
+                        val gson = Gson()
+                        val adapter: TypeAdapter<Authorization> =
+                            gson.getAdapter(Authorization::class.java)
+                        val error: Authorization = adapter.fromJson(body?.string())
+                        _favoriteLiveData.value = error
+                    }
+                })
+        }
     }
 }

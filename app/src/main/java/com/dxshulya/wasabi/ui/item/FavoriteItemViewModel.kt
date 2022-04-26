@@ -7,6 +7,7 @@ import com.dxshulya.wasabi.App
 import com.dxshulya.wasabi.datastore.SharedPreference
 import com.dxshulya.wasabi.model.Authorization
 import com.dxshulya.wasabi.model.Favorites
+import com.dxshulya.wasabi.model.Task
 import com.dxshulya.wasabi.repository.TaskRepository
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter
@@ -20,6 +21,8 @@ class FavoriteItemViewModel(private val favorite: Favorites.Favorite) : ViewMode
         App.getInstance().appComponent.inject(this)
     }
 
+    var isPressed = false
+
     @Inject
     lateinit var taskRepository: TaskRepository
 
@@ -30,20 +33,61 @@ class FavoriteItemViewModel(private val favorite: Favorites.Favorite) : ViewMode
     val deleteFavoriteLiveData: LiveData<Authorization>
         get() = _deleteFavoriteLiveData
 
-    fun deleteFavorite() {
-        taskRepository.deleteFavorite(favorite.id)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                _deleteFavoriteLiveData.value = it
-            }, {
-                if (it is HttpException) {
-                    val body = it.response()?.errorBody()
-                    val gson = Gson()
-                    val adapter: TypeAdapter<Authorization> =
-                        gson.getAdapter(Authorization::class.java)
-                    val error: Authorization = adapter.fromJson(body?.string())
-                    _deleteFavoriteLiveData.value = error
-                }
-            })
+//    fun deleteFavorite() {
+//        taskRepository.deleteFavorite(favorite.id)
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribe({
+//                _deleteFavoriteLiveData.value = it
+//            }, {
+//                if (it is HttpException) {
+//                    val body = it.response()?.errorBody()
+//                    val gson = Gson()
+//                    val adapter: TypeAdapter<Authorization> =
+//                        gson.getAdapter(Authorization::class.java)
+//                    val error: Authorization = adapter.fromJson(body?.string())
+//                    _deleteFavoriteLiveData.value = error
+//                }
+//            })
+//    }
+
+    fun deleteOrPostFavorite() {
+        isPressed = !isPressed
+        favorite.isDisliked = isPressed
+
+        if(isPressed) {
+            taskRepository.deleteFavorite(favorite.id)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    _deleteFavoriteLiveData.value = it
+                }, {
+                    if (it is HttpException) {
+                        val body = it.response()?.errorBody()
+                        val gson = Gson()
+                        val adapter: TypeAdapter<Authorization> =
+                            gson.getAdapter(Authorization::class.java)
+                        val error: Authorization = adapter.fromJson(body?.string())
+                        _deleteFavoriteLiveData.value = error
+                    }
+                })
+        }
+
+        else if(!isPressed) {
+            val task = Task(favorite.id, favorite.text, favorite.answer, favorite.formula)
+            taskRepository.postFavorite(task)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    _deleteFavoriteLiveData.value = it
+                }, {
+                    if (it is HttpException) {
+                        val body = it.response()?.errorBody()
+                        val gson = Gson()
+                        val adapter: TypeAdapter<Authorization> =
+                            gson.getAdapter(Authorization::class.java)
+                        val error: Authorization = adapter.fromJson(body?.string())
+                        _deleteFavoriteLiveData.value = error
+                    }
+                })
+        }
+
     }
 }

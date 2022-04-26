@@ -54,7 +54,6 @@ class FavoriteAdapter(private val fragmentLifecycleOwner: LifecycleOwner) :
             binding.viewModel = FavoriteItemViewModel(favorite).apply {
                 showDislikes(favorite)
                 this.deleteFavoriteLiveData.observe(fragmentLifecycleOwner) {
-                    favorite.isDisliked = true
                     showDislikes(favorite)
                 }
             }

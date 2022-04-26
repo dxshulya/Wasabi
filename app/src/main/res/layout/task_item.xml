@@ -66,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_margin="6dp"
-                android:onClick="@{() -> viewModel.postFavorite()}"
+                android:onClick="@{() -> viewModel.postOrDeleteFavorite()}"
                 android:src="@drawable/ic_favorite_border"
                 app:tint="@color/red" />
 

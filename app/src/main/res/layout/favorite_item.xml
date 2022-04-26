@@ -67,7 +67,7 @@
                 android:layout_margin="6dp"
                 android:src="@drawable/ic_favorite"
                 app:tint="@color/red"
-                android:onClick="@{() -> viewModel.deleteFavorite()}"/>
+                android:onClick="@{() -> viewModel.deleteOrPostFavorite()}"/>
 
         </RelativeLayout>
 
