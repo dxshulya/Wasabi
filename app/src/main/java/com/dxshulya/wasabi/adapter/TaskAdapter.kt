@@ -52,6 +52,7 @@ class TaskAdapter(private val fragmentLifecycleOwner: LifecycleOwner) :
                 showLikes(task)
                 this.favoriteLiveData.observe(fragmentLifecycleOwner) {
                     showLikes(task)
+                    getTotalCount()
                 }
             }
             with(binding) {

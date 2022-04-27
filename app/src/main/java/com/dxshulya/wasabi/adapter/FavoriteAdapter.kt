@@ -55,6 +55,7 @@ class FavoriteAdapter(private val fragmentLifecycleOwner: LifecycleOwner) :
                 showDislikes(favorite)
                 this.deleteFavoriteLiveData.observe(fragmentLifecycleOwner) {
                     showDislikes(favorite)
+                    getTotalCount()
                 }
             }
             with(binding) {
@@ -68,8 +69,6 @@ class FavoriteAdapter(private val fragmentLifecycleOwner: LifecycleOwner) :
         private fun showDislikes(favorite: Favorites.Favorite) {
             if (favorite.isDisliked) {
                 binding.favoriteLike.setImageResource(R.drawable.ic_favorite_border)
-//                notifyItemRemoved(position)
-//                notifyItemRangeChanged (position, itemCount)
             } else binding.favoriteLike.setImageResource(R.drawable.ic_favorite)
         }
     }

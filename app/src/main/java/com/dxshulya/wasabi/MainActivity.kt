@@ -1,6 +1,7 @@
 package com.dxshulya.wasabi
 
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -23,6 +24,7 @@ import com.dxshulya.wasabi.databinding.ActivityMainBinding
 import com.dxshulya.wasabi.datastore.SharedPreference
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.switchmaterial.SwitchMaterial
+import java.security.acl.Owner
 
 
 class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedListener,
@@ -79,7 +81,6 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        //работает, если переходит с тасков
         navView.menu.findItem(R.id.exit).setOnMenuItemClickListener {
             if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
                 binding.drawerLayout.closeDrawer(GravityCompat.START)
@@ -103,15 +104,16 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         val counterFavorites = menu.findItem(R.id.nav_favorite)
 
         if (mainActivityViewModel.sharedPreference.totalCount == 0) {
-           counterFavorites.actionView = null
-        }
-        else {
+            counterFavorites.actionView = null
+        } else {
             counterFavorites.setActionView(R.layout.custom_badge_layout)
             val view = counterFavorites.actionView
             badgeCounter = view.findViewById(R.id.badge_counter)
-            mainActivityViewModel.countLiveData.observe(this, Observer { t ->
-                mainActivityViewModel.getTotalCount()
-                badgeCounter.text = t.totalCount.toString()
+            mainActivityViewModel.countLiveData.observe(this, Observer {
+                badgeCounter.text = it
+                Handler().postDelayed({
+                    mainActivityViewModel.getTotalCount()
+                }, 5000)
             })
         }
 

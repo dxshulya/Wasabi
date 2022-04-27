@@ -1,5 +1,6 @@
 package com.dxshulya.wasabi.ui.item
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -33,22 +34,15 @@ class FavoriteItemViewModel(private val favorite: Favorites.Favorite) : ViewMode
     val deleteFavoriteLiveData: LiveData<Authorization>
         get() = _deleteFavoriteLiveData
 
-//    fun deleteFavorite() {
-//        taskRepository.deleteFavorite(favorite.id)
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribe({
-//                _deleteFavoriteLiveData.value = it
-//            }, {
-//                if (it is HttpException) {
-//                    val body = it.response()?.errorBody()
-//                    val gson = Gson()
-//                    val adapter: TypeAdapter<Authorization> =
-//                        gson.getAdapter(Authorization::class.java)
-//                    val error: Authorization = adapter.fromJson(body?.string())
-//                    _deleteFavoriteLiveData.value = error
-//                }
-//            })
-//    }
+    fun getTotalCount() {
+        taskRepository.getTotalCount()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                sharedPreference.totalCount = it.totalCount
+            }, {
+                Log.e("TOTAL_COUNT", it.message.toString())
+            })
+    }
 
     fun deleteOrPostFavorite() {
         isPressed = !isPressed

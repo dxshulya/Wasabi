@@ -1,5 +1,6 @@
 package com.dxshulya.wasabi.ui.item
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -31,6 +32,16 @@ class TaskItemViewModel(private val task: Task) : ViewModel() {
     private var _favoriteLiveData = MutableLiveData<Authorization>()
     val favoriteLiveData: LiveData<Authorization>
         get() = _favoriteLiveData
+
+    fun getTotalCount() {
+        taskRepository.getTotalCount()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                sharedPreference.totalCount = it.totalCount
+            }, {
+                Log.e("TOTAL_COUNT", it.message.toString())
+            })
+    }
 
     fun postOrDeleteFavorite() {
         isPressed = !isPressed
