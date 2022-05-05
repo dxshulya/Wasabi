@@ -78,6 +78,11 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+        badgeCounter = MenuItemCompat.getActionView(
+            navView.menu.findItem(R.id.nav_favorite)
+        ) as TextView
+        initCountDrawer()
+
         navView.menu.findItem(R.id.exit).setOnMenuItemClickListener {
             if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
                 binding.drawerLayout.closeDrawer(GravityCompat.START)

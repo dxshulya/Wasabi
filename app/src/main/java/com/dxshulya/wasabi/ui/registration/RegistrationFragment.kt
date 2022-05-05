@@ -167,7 +167,7 @@ class RegistrationFragment : Fragment() {
             viewModel.postRegistration()
             Handler().postDelayed({
                 viewModel.getTotalCount()
-            }, 5000)
+            }, 2000)
             progressBar.visibility = View.VISIBLE
         }
 
