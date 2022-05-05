@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
@@ -11,7 +12,8 @@
         <item
             android:id="@+id/nav_favorite"
             android:icon="@drawable/ic_favorite_border"
-            android:title="@string/menu_fav" />
+            android:title="@string/menu_fav"
+            app:actionViewClass="android.widget.TextView" />
     </group>
     <item android:title="Выход из аккаунта">
         <menu>

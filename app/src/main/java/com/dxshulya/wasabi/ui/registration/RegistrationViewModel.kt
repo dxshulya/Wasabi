@@ -1,5 +1,6 @@
 package com.dxshulya.wasabi.ui.registration
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,6 +11,7 @@ import com.dxshulya.wasabi.model.User
 import com.dxshulya.wasabi.repository.TaskRepository
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import retrofit2.HttpException
 import javax.inject.Inject
 
@@ -28,6 +30,17 @@ class RegistrationViewModel : ViewModel() {
     private var _registrationLiveData = MutableLiveData<Authorization>()
     val registrationLiveData: LiveData<Authorization>
         get() = _registrationLiveData
+
+    fun getTotalCount() {
+        taskRepository.getTotalCount()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                sharedPreference.totalCount = it.totalCount
+                //_countLiveData.value = it.totalCount.toString()
+            }, {
+                Log.e("TOTAL_COUNT", it.message.toString())
+            })
+    }
 
     fun postRegistration() {
         val user = User(

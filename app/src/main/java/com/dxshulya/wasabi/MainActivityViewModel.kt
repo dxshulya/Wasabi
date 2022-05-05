@@ -1,8 +1,6 @@
 package com.dxshulya.wasabi
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dxshulya.wasabi.datastore.SharedPreference
 import com.dxshulya.wasabi.repository.TaskRepository
@@ -13,11 +11,7 @@ class MainActivityViewModel : ViewModel() {
 
     init {
         App.getInstance().appComponent.inject(this)
-        getTotalCount()
     }
-
-    private var _countLiveData = MutableLiveData<String>()
-    val countLiveData: LiveData<String> = _countLiveData
 
     @Inject
     lateinit var sharedPreference: SharedPreference
@@ -30,12 +24,10 @@ class MainActivityViewModel : ViewModel() {
     }
 
     fun getTotalCount() {
-
         taskRepository.getTotalCount()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 sharedPreference.totalCount = it.totalCount
-                _countLiveData.value = it.totalCount.toString()
             }, {
                 Log.e("TOTAL_COUNT", it.message.toString())
             })

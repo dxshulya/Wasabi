@@ -1,6 +1,7 @@
 package com.dxshulya.wasabi.ui.registration
 
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
@@ -164,6 +165,9 @@ class RegistrationFragment : Fragment() {
 
         if(validEmail && validName && validPassword) {
             viewModel.postRegistration()
+            Handler().postDelayed({
+                viewModel.getTotalCount()
+            }, 5000)
             progressBar.visibility = View.VISIBLE
         }
 

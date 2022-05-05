@@ -1,17 +1,16 @@
 package com.dxshulya.wasabi
 
+import android.graphics.Typeface
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
+import android.view.Gravity
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
+import androidx.core.view.MenuItemCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
@@ -21,10 +20,8 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.dxshulya.wasabi.databinding.ActivityMainBinding
-import com.dxshulya.wasabi.datastore.SharedPreference
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.switchmaterial.SwitchMaterial
-import java.security.acl.Owner
 
 
 class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedListener,
@@ -89,44 +86,22 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
             mainActivityViewModel.sharedPreference.email = ""
             mainActivityViewModel.sharedPreference.name = ""
             mainActivityViewModel.sharedPreference.password = ""
+            mainActivityViewModel.sharedPreference.totalCount = 0
             findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.loginFragment)
             true
         }
     }
 
+    private fun initCountDrawer() {
+        badgeCounter.gravity = Gravity.CENTER_VERTICAL
+        badgeCounter.setTypeface(null, Typeface.BOLD)
+        badgeCounter.setTextColor(resources.getColor(R.color.red))
+        badgeCounter.text = mainActivityViewModel.sharedPreference.totalCount.toString()
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.main_menu, menu)
-        val counterFavorites = menu.findItem(R.id.nav_favorite)
-
-        if (mainActivityViewModel.sharedPreference.totalCount == 0) {
-            counterFavorites.actionView = null
-        } else {
-            counterFavorites.setActionView(R.layout.custom_badge_layout)
-            val view = counterFavorites.actionView
-            badgeCounter = view.findViewById(R.id.badge_counter)
-            mainActivityViewModel.countLiveData.observe(this, Observer {
-                badgeCounter.text = it
-                Handler().postDelayed({
-                    mainActivityViewModel.getTotalCount()
-                }, 5000)
-            })
-        }
-
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val currentItem = item.itemId
-
-        if (currentItem == R.id.nav_favorite) {
-            findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.nav_favorite)
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     override fun onDestinationChanged(
@@ -160,17 +135,33 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         val headerEmail = header.findViewById<TextView>(R.id.header_email)
         headerName.text = mainActivityViewModel.sharedPreference.name
         headerEmail.text = mainActivityViewModel.sharedPreference.email
+        badgeCounter = MenuItemCompat.getActionView(
+            navView.menu.findItem(R.id.nav_favorite)
+        ) as TextView
+        initCountDrawer()
     }
 
     override fun onDrawerOpened(drawerView: View) {
-        Log.i("OPEN", "1")
+        val navView: NavigationView = binding.navView
+        badgeCounter = MenuItemCompat.getActionView(
+            navView.menu.findItem(R.id.nav_favorite)
+        ) as TextView
+        initCountDrawer()
     }
 
     override fun onDrawerClosed(drawerView: View) {
-        Log.i("CLOSE", "1")
+        val navView: NavigationView = binding.navView
+        badgeCounter = MenuItemCompat.getActionView(
+            navView.menu.findItem(R.id.nav_favorite)
+        ) as TextView
+        initCountDrawer()
     }
 
     override fun onDrawerStateChanged(newState: Int) {
-        Log.i("STATE", "1")
+        val navView: NavigationView = binding.navView
+        badgeCounter = MenuItemCompat.getActionView(
+            navView.menu.findItem(R.id.nav_favorite)
+        ) as TextView
+        initCountDrawer()
     }
 }

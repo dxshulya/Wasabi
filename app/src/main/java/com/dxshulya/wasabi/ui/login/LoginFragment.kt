@@ -1,6 +1,7 @@
 package com.dxshulya.wasabi.ui.login
 
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
@@ -70,6 +71,9 @@ class LoginFragment : Fragment() {
 
         if(validEmail && validPassword) {
             viewModel.postLogin()
+            Handler().postDelayed({
+                viewModel.getTotalCount()
+            }, 5000)
             progressBar.visibility = View.VISIBLE
         }
 
