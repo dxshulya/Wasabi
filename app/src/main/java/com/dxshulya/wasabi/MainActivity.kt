@@ -2,7 +2,6 @@ package com.dxshulya.wasabi
 
 import android.graphics.Typeface
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.TextView
@@ -20,6 +19,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.dxshulya.wasabi.databinding.ActivityMainBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.switchmaterial.SwitchMaterial
 
@@ -87,13 +87,29 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
             if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
                 binding.drawerLayout.closeDrawer(GravityCompat.START)
             }
-            mainActivityViewModel.sharedPreference.token = ""
-            mainActivityViewModel.sharedPreference.email = ""
-            mainActivityViewModel.sharedPreference.name = ""
-            mainActivityViewModel.sharedPreference.password = ""
-            mainActivityViewModel.sharedPreference.totalCount = 0
-            findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.loginFragment)
+            showWarningWindow()
             true
+        }
+    }
+
+    private fun showWarningWindow() {
+        this.let {
+            MaterialAlertDialogBuilder(it)
+                .setTitle(getString(R.string.error_window_title))
+                .setMessage("Вы действительно хотите выйти?")
+                .setPositiveButton(getString(R.string.error_window_btn)) { _, _ ->
+                    findNavController(
+                        R.id.nav_host_fragment_content_main
+                    ).navigate(R.id.loginFragment)
+                    mainActivityViewModel.sharedPreference.apply {
+                        token = ""
+                        email = ""
+                        password = ""
+                        totalCount = 0
+                    }
+                }
+                .setNegativeButton("Отмена") { dialog, _ -> dialog.dismiss() }
+                .show()
         }
     }
 
