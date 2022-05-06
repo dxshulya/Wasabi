@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.dxshulya.wasabi.ui.item.FavoriteItemViewModel" />
@@ -19,15 +20,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp">
-
-<!--            <TextView-->
-<!--                android:id="@+id/favorite_number"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignParentStart="true"-->
-<!--                android:layout_margin="6dp"-->
-<!--                android:text="@string/task_number"-->
-<!--                android:textSize="14sp" />-->
 
             <TextView
                 android:id="@+id/favorite_formula"
@@ -62,11 +54,12 @@
                 android:id="@+id/favorite_like"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/favorite_text"
                 android:layout_alignParentEnd="true"
                 android:layout_margin="6dp"
+                android:onClick="@{() -> viewModel.deleteOrPostFavorite()}"
                 android:src="@drawable/ic_favorite"
-                app:tint="@color/red"
-                android:onClick="@{() -> viewModel.deleteOrPostFavorite()}"/>
+                app:tint="@color/red" />
 
         </RelativeLayout>
 
