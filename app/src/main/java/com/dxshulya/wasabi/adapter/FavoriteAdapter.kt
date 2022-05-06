@@ -2,7 +2,6 @@ package com.dxshulya.wasabi.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.paging.PagingDataAdapter
@@ -59,10 +58,12 @@ class FavoriteAdapter(private val fragmentLifecycleOwner: LifecycleOwner) :
                 }
             }
             with(binding) {
-                //favoriteNumber.text = "№ " + (position + 1)
                 favoriteFormula.text = favorite.formula
                 favoriteText.text = favorite.text
                 favoriteAnswer.text = "Ответ: " + favorite.answer
+                if (itemCount == 0) {
+
+                }
             }
         }
 

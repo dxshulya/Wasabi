@@ -1,5 +1,6 @@
 package com.dxshulya.wasabi.ui.task
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -18,6 +19,7 @@ class TaskViewModel : ViewModel() {
     init {
         App.getInstance().appComponent.inject(this)
         getTasks()
+        getTotalCount()
     }
 
     private var _tasks = MutableLiveData<PagingData<Task>>()
@@ -38,5 +40,15 @@ class TaskViewModel : ViewModel() {
             .subscribe {
                 _tasks.value = it
             }
+    }
+
+    fun getTotalCount() {
+        taskRepository.getTotalCount()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                sharedPreference.totalCount = it.totalCount
+            }, {
+                Log.e("TOTAL_COUNT", it.message.toString())
+            })
     }
 }

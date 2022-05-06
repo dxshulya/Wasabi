@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -26,10 +29,14 @@ class FavoriteFragment : Fragment() {
 
     private lateinit var favoriteRecycler: RecyclerView
     private lateinit var favoriteRefresh: SwipeRefreshLayout
+    private lateinit var emptyView: TextView
+    private lateinit var emptyText: TextView
 
     private fun initUis() {
         favoriteRecycler = binding.favouriteRecycler
         favoriteRefresh = binding.favoriteRefresh
+        emptyView = binding.emptyView
+        emptyText = binding.emptyText
     }
 
     override fun onCreateView(
@@ -52,6 +59,13 @@ class FavoriteFragment : Fragment() {
         }
 
         favoriteRefresh.setColorSchemeColors(resources.getColor((R.color.green)))
+
+        favoriteAdapter?.addLoadStateListener {
+            if (it.append is LoadState.NotLoading && it.append.endOfPaginationReached) {
+                emptyView.isVisible = favoriteAdapter?.itemCount!! < 1
+                emptyText.isVisible = favoriteAdapter?.itemCount!! < 1
+            }
+        }
 
         return binding.root
     }

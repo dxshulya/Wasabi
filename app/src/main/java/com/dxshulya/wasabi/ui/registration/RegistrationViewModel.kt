@@ -36,7 +36,6 @@ class RegistrationViewModel : ViewModel() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 sharedPreference.totalCount = it.totalCount
-                //_countLiveData.value = it.totalCount.toString()
             }, {
                 Log.e("TOTAL_COUNT", it.message.toString())
             })

@@ -2,7 +2,6 @@ package com.dxshulya.wasabi.util
 
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.lifecycle.LifecycleOwner
 import com.google.android.material.textfield.TextInputEditText
 import io.reactivex.rxjava3.core.Observable
 import java.util.concurrent.TimeUnit

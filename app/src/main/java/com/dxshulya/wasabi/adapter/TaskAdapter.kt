@@ -1,10 +1,8 @@
 package com.dxshulya.wasabi.adapter
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.LifecycleOwner
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -77,12 +75,12 @@ class TaskAdapter(private val fragmentLifecycleOwner: LifecycleOwner) :
                 binding.taskLike.setImageResource(R.drawable.ic_favorite_border)
             }
         }
+
         @SuppressLint("SetTextI18n")
         private fun showAnswer(task: Task) {
             if (task.isShowAnswer) {
                 binding.taskAnswer.text = "Ответ: " + task.answer
-            }
-            else binding.taskAnswer.text = "Показать ответ"
+            } else binding.taskAnswer.text = "Показать ответ"
         }
     }
 }
