@@ -3,6 +3,7 @@ package com.dxshulya.wasabi
 import android.graphics.Typeface
 import android.os.Bundle
 import android.view.Gravity
+import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -98,9 +99,10 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
                 .setTitle(getString(R.string.error_window_title))
                 .setMessage("Вы действительно хотите выйти?")
                 .setPositiveButton(getString(R.string.error_window_btn)) { _, _ ->
-                    findNavController(
-                        R.id.nav_host_fragment_content_main
-                    ).navigate(R.id.loginFragment)
+                    val navController = findNavController(R.id.nav_host_fragment_content_main)
+                    navController.popBackStack(R.id.nav_task, true)
+                    navController.popBackStack(R.id.nav_favorite, true)
+                    navController.navigate(R.id.loginFragment)
                     mainActivityViewModel.sharedPreference.apply {
                         token = ""
                         email = ""
