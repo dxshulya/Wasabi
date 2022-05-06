@@ -59,7 +59,7 @@ class FavoriteAdapter(private val fragmentLifecycleOwner: LifecycleOwner) :
                 }
             }
             with(binding) {
-                favoriteNumber.text = "№ " + (position + 1)
+                //favoriteNumber.text = "№ " + (position + 1)
                 favoriteFormula.text = favorite.formula
                 favoriteText.text = favorite.text
                 favoriteAnswer.text = "Ответ: " + favorite.answer

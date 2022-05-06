@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".ui.favorite.FavoriteFragment">
 
@@ -15,7 +16,8 @@
             android:id="@+id/favouriteRecycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/favorite_item" />
+            tools:listitem="@layout/favorite_item"
+            app:reverseLayout="true"/>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
