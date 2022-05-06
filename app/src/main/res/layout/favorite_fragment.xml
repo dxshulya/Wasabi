@@ -29,6 +29,14 @@
         android:textColor="@color/blueDark"
         android:visibility="gone"/>
 
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/favorite_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        app:indicatorColor="@color/green" />
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/favoriteRefresh"
         android:layout_width="match_parent"
