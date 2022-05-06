@@ -18,6 +18,8 @@ import com.dxshulya.wasabi.ui.item.TaskItemViewModel
 class TaskAdapter(private val fragmentLifecycleOwner: LifecycleOwner) :
     PagingDataAdapter<Task, TaskAdapter.TaskViewHolder>(COMPARATOR) {
 
+    var isPressed = false
+
     companion object {
         private val COMPARATOR = object : DiffUtil.ItemCallback<Task>() {
             override fun areItemsTheSame(oldItem: Task, newItem: Task): Boolean =
@@ -61,7 +63,8 @@ class TaskAdapter(private val fragmentLifecycleOwner: LifecycleOwner) :
                 taskFormula.text = task.formula
                 taskText.text = task.text
                 taskAnswer.setOnClickListener {
-                    task.isShowAnswer = true
+                    isPressed = !isPressed
+                    task.isShowAnswer = isPressed
                     showAnswer(task)
                 }
             }
