@@ -1,5 +1,6 @@
 package com.dxshulya.wasabi.ui.favorite
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -35,8 +36,10 @@ class FavoriteViewModel : ViewModel() {
             .observeOn(AndroidSchedulers.mainThread())
             .map { it }
             .cachedIn(viewModelScope)
-            .subscribe {
+            .subscribe ({
                 _favorites.value = it
+            }){
+                Log.e("FAV_PAGING", it.message.toString())
             }
     }
 }

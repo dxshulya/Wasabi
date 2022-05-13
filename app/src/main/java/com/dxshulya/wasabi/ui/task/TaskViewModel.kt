@@ -37,8 +37,10 @@ class TaskViewModel : ViewModel() {
             .observeOn(AndroidSchedulers.mainThread())
             .map { it }
             .cachedIn(viewModelScope)
-            .subscribe {
+            .subscribe({
                 _tasks.value = it
+            }){
+                Log.e("TASK_PAGING", it.message.toString())
             }
     }
 
