@@ -25,10 +25,6 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 
 class RegistrationFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = RegistrationFragment()
-    }
-
     private lateinit var viewModel: RegistrationViewModel
 
     private lateinit var binding: RegistrationFragmentBinding

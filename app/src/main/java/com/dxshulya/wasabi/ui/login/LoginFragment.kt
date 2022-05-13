@@ -25,10 +25,6 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 
 class LoginFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = LoginFragment()
-    }
-
     private lateinit var viewModel: LoginViewModel
 
     private lateinit var binding: LoginFragmentBinding

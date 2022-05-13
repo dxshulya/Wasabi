@@ -20,10 +20,6 @@ import com.google.android.material.progressindicator.CircularProgressIndicator
 
 class FavoriteFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = FavoriteFragment()
-    }
-
     private lateinit var viewModel: FavoriteViewModel
     private var favoriteAdapter: FavoriteAdapter? = null
 

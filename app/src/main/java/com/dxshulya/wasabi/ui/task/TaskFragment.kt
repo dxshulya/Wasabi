@@ -18,10 +18,6 @@ import com.google.android.material.progressindicator.CircularProgressIndicator
 
 class TaskFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = TaskFragment()
-    }
-
     private lateinit var viewModel: TaskViewModel
 
     private lateinit var binding: TaskFragmentBinding
