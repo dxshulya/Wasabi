@@ -1,17 +1,16 @@
-package com.dxshulya.wasabi.repository
+package com.dxshulya.wasabi.data.repository
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.rxjava3.flowable
 import com.dxshulya.wasabi.data.Api
-import com.dxshulya.wasabi.model.*
-import com.dxshulya.wasabi.paging.FavoritePagingSource
-import com.dxshulya.wasabi.paging.TaskPagingSource
+import com.dxshulya.wasabi.data.model.*
+import com.dxshulya.wasabi.data.paging.FavoritePagingSource
+import com.dxshulya.wasabi.data.paging.TaskPagingSource
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 class TaskRepository(private val api: Api) {

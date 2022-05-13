@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.dxshulya.wasabi.R
-import com.dxshulya.wasabi.adapter.FavoriteAdapter
+import com.dxshulya.wasabi.ui.adapter.FavoriteAdapter
 import com.dxshulya.wasabi.databinding.FavoriteFragmentBinding
 import com.google.android.material.progressindicator.CircularProgressIndicator
 

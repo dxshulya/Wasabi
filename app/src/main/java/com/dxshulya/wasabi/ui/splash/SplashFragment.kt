@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.dxshulya.wasabi.R
-import com.dxshulya.wasabi.datastore.SharedPreference
+import com.dxshulya.wasabi.data.datastore.SharedPreference
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class SplashFragment : Fragment(R.layout.fragment_splash) {

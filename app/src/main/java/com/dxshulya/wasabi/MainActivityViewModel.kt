@@ -2,8 +2,8 @@ package com.dxshulya.wasabi
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.dxshulya.wasabi.datastore.SharedPreference
-import com.dxshulya.wasabi.repository.TaskRepository
+import com.dxshulya.wasabi.data.datastore.SharedPreference
+import com.dxshulya.wasabi.data.repository.TaskRepository
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 

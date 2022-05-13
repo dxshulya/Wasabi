@@ -1,4 +1,4 @@
-package com.dxshulya.wasabi.util
+package com.dxshulya.wasabi.core.util
 
 import android.text.Editable
 import android.text.TextWatcher

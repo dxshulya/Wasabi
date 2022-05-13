@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.dxshulya.wasabi.R
-import com.dxshulya.wasabi.adapter.TaskAdapter
+import com.dxshulya.wasabi.ui.adapter.TaskAdapter
 import com.dxshulya.wasabi.databinding.TaskFragmentBinding
 import com.google.android.material.progressindicator.CircularProgressIndicator
 

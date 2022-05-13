@@ -1,4 +1,4 @@
-package com.dxshulya.wasabi.adapter
+package com.dxshulya.wasabi.ui.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.dxshulya.wasabi.R
 import com.dxshulya.wasabi.databinding.FavoriteItemBinding
-import com.dxshulya.wasabi.model.Favorites
+import com.dxshulya.wasabi.data.model.Favorites
 import com.dxshulya.wasabi.ui.item.FavoriteItemViewModel
 
 class FavoriteAdapter(private val fragmentLifecycleOwner: LifecycleOwner) :

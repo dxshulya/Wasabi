@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.dxshulya.wasabi.R
 import com.dxshulya.wasabi.databinding.FragmentThirdIntroBinding
-import com.dxshulya.wasabi.datastore.SharedPreference
+import com.dxshulya.wasabi.data.datastore.SharedPreference
 
 class ThirdIntroFragment : Fragment() {
 

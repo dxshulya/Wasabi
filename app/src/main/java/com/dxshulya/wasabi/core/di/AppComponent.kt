@@ -1,7 +1,7 @@
-package com.dxshulya.wasabi.di
+package com.dxshulya.wasabi.core.di
 
 import com.dxshulya.wasabi.MainActivityViewModel
-import com.dxshulya.wasabi.repository.TaskRepository
+import com.dxshulya.wasabi.data.repository.TaskRepository
 import com.dxshulya.wasabi.ui.favorite.FavoriteViewModel
 import com.dxshulya.wasabi.ui.item.FavoriteItemViewModel
 import com.dxshulya.wasabi.ui.item.TaskItemViewModel

@@ -1,8 +1,8 @@
-package com.dxshulya.wasabi.di
+package com.dxshulya.wasabi.core.di
 
 import com.dxshulya.wasabi.data.Api
-import com.dxshulya.wasabi.datastore.SharedPreference
-import com.dxshulya.wasabi.token.TokenInterceptor
+import com.dxshulya.wasabi.data.datastore.SharedPreference
+import com.dxshulya.wasabi.core.token.TokenInterceptor
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

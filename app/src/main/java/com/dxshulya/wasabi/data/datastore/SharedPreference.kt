@@ -1,4 +1,4 @@
-package com.dxshulya.wasabi.datastore
+package com.dxshulya.wasabi.data.datastore
 
 import android.content.Context
 

@@ -1,4 +1,4 @@
-package com.dxshulya.wasabi.model
+package com.dxshulya.wasabi.data.model
 
 data class Task(
     val id: String,

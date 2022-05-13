@@ -8,9 +8,9 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.rxjava3.cachedIn
 import com.dxshulya.wasabi.App
-import com.dxshulya.wasabi.datastore.SharedPreference
-import com.dxshulya.wasabi.model.Favorites
-import com.dxshulya.wasabi.repository.TaskRepository
+import com.dxshulya.wasabi.data.datastore.SharedPreference
+import com.dxshulya.wasabi.data.model.Favorites
+import com.dxshulya.wasabi.data.repository.TaskRepository
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 

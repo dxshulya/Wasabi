@@ -1,10 +1,10 @@
-package com.dxshulya.wasabi.di
+package com.dxshulya.wasabi.core.di
 
 import android.content.Context
 import androidx.paging.ExperimentalPagingApi
 import com.dxshulya.wasabi.data.Api
-import com.dxshulya.wasabi.datastore.SharedPreference
-import com.dxshulya.wasabi.repository.TaskRepository
+import com.dxshulya.wasabi.data.datastore.SharedPreference
+import com.dxshulya.wasabi.data.repository.TaskRepository
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

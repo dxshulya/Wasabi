@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.dxshulya.wasabi.R
 import com.dxshulya.wasabi.databinding.LoginFragmentBinding
-import com.dxshulya.wasabi.util.Util.Companion.toObservable
+import com.dxshulya.wasabi.core.util.Util.Companion.toObservable
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.textfield.TextInputEditText

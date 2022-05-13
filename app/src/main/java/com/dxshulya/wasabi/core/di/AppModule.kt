@@ -1,4 +1,4 @@
-package com.dxshulya.wasabi.di
+package com.dxshulya.wasabi.core.di
 
 import android.app.Application
 import android.content.Context
