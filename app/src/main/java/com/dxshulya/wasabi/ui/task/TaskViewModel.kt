@@ -39,7 +39,7 @@ class TaskViewModel : ViewModel() {
             .cachedIn(viewModelScope)
             .subscribe({
                 _tasks.value = it
-            }){
+            }) {
                 Log.e("TASK_PAGING", it.message.toString())
             }
     }

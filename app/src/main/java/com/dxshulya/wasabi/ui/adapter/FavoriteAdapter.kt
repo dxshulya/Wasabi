@@ -2,6 +2,7 @@ package com.dxshulya.wasabi.ui.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.paging.PagingDataAdapter
@@ -55,15 +56,13 @@ class FavoriteAdapter(private val fragmentLifecycleOwner: LifecycleOwner) :
                 this.deleteFavoriteLiveData.observe(fragmentLifecycleOwner) {
                     showDislikes(favorite)
                     getTotalCount()
+
                 }
             }
             with(binding) {
                 favoriteFormula.text = favorite.formula
                 favoriteText.text = favorite.text
                 favoriteAnswer.text = "Ответ: " + favorite.answer
-                if (itemCount == 0) {
-
-                }
             }
         }
 

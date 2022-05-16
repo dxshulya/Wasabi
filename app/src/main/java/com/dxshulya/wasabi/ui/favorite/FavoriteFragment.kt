@@ -55,7 +55,7 @@ class FavoriteFragment : Fragment() {
 
         favoriteRefresh.setOnRefreshListener {
             favoriteRefresh.isRefreshing = false
-            favoriteRecycler.adapter = FavoriteAdapter(viewLifecycleOwner).also { favoriteAdapter = it }
+            //favoriteRecycler.adapter = FavoriteAdapter(viewLifecycleOwner).also { favoriteAdapter = it }
             viewModel.getFavorites()
         }
 

@@ -3,7 +3,6 @@ package com.dxshulya.wasabi
 import android.graphics.Typeface
 import android.os.Bundle
 import android.view.Gravity
-import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -74,6 +73,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
             ), drawerLayout
         )
 
+
         navController.addOnDestinationChangedListener(this)
         drawerLayout.addDrawerListener(this)
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -89,6 +89,15 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
                 binding.drawerLayout.closeDrawer(GravityCompat.START)
             }
             showWarningWindow()
+            true
+        }
+
+
+        navView.menu.findItem(R.id.nav_task).setOnMenuItemClickListener {
+            if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                binding.drawerLayout.closeDrawer(GravityCompat.START)
+            }
+            navController.popBackStack()
             true
         }
     }
