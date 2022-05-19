@@ -2,8 +2,10 @@ package com.dxshulya.wasabi
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.dxshulya.wasabi.data.datastore.SharedPreference
+import com.dxshulya.wasabi.data.repository.ITaskRepository
+import com.dxshulya.wasabi.domain.datastore.SharedPreference
 import com.dxshulya.wasabi.data.repository.TaskRepository
+import com.dxshulya.wasabi.domain.datastore.ISharedPreference
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
@@ -14,10 +16,10 @@ class MainActivityViewModel : ViewModel() {
     }
 
     @Inject
-    lateinit var sharedPreference: SharedPreference
+    lateinit var sharedPreference: ISharedPreference
 
     @Inject
-    lateinit var taskRepository: TaskRepository
+    lateinit var taskRepository: ITaskRepository
 
     fun changeMode(isNight: Boolean) {
         sharedPreference.isDarkMode = isNight

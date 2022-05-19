@@ -1,4 +1,4 @@
-package com.dxshulya.wasabi.data.model
+package com.dxshulya.wasabi.domain.model
 
 data class User(
     val email: String,

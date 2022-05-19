@@ -1,8 +1,8 @@
-package com.dxshulya.wasabi.data.datastore
+package com.dxshulya.wasabi.domain.datastore
 
 import android.content.Context
 
-class SharedPreference(context: Context) {
+class SharedPreference(context: Context): ISharedPreference {
 
     companion object {
         private const val EMAIL = "e-mail"
@@ -10,7 +10,6 @@ class SharedPreference(context: Context) {
         private const val PASSWORD = "password"
         private const val JWT_TOKEN = "jwt_token"
         private const val IS_FIRST_RUN = "true"
-        private const val TOTAL_PAGE = "page"
         private const val TOTAL_COUNT = "count"
         private const val IS_DARK_MODE = "false"
     }
@@ -46,37 +45,37 @@ class SharedPreference(context: Context) {
         return sharedPreferences.getInt(key, defaultValue)
     }
 
-    var email: String
+    override var email: String
         get() = getString(EMAIL)
         set(value) {
             setString(EMAIL, value)
         }
-    var name: String
+    override var name: String
         get() = getString(NAME)
         set(value) {
             setString(NAME, value)
         }
-    var password: String
+    override var password: String
         get() = getString(PASSWORD)
         set(value) {
             setString(PASSWORD, value)
         }
-    var token: String
+    override var token: String
         get() = getString(JWT_TOKEN)
         set(value) {
             setString(JWT_TOKEN, value)
         }
-    var isFirstRun: Boolean
+    override var isFirstRun: Boolean
         get() = getBoolean(IS_FIRST_RUN)
         set(value) {
             setBoolean(IS_FIRST_RUN, value)
         }
-    var totalCount: Int
+    override var totalCount: Int
         get() = getInt(TOTAL_COUNT)
         set(value) {
             setInt(TOTAL_COUNT, value)
         }
-    var isDarkMode: Boolean
+    override var isDarkMode: Boolean
         get() = getBooleanTheme(IS_DARK_MODE)
         set(value) {
             setBoolean(IS_DARK_MODE, value)

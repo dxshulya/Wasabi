@@ -1,7 +1,7 @@
 package com.dxshulya.wasabi.core.di
 
 import com.dxshulya.wasabi.data.Api
-import com.dxshulya.wasabi.data.datastore.SharedPreference
+import com.dxshulya.wasabi.domain.datastore.SharedPreference
 import com.dxshulya.wasabi.core.token.TokenInterceptor
 import dagger.Module
 import dagger.Provides

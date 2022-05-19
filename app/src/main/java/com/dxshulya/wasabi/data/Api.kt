@@ -1,6 +1,6 @@
 package com.dxshulya.wasabi.data
 
-import com.dxshulya.wasabi.data.model.*
+import com.dxshulya.wasabi.domain.model.*
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.*

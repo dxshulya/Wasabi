@@ -5,10 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dxshulya.wasabi.App
-import com.dxshulya.wasabi.data.datastore.SharedPreference
-import com.dxshulya.wasabi.data.model.Authorization
-import com.dxshulya.wasabi.data.model.User
+import com.dxshulya.wasabi.data.repository.ITaskRepository
+import com.dxshulya.wasabi.domain.datastore.SharedPreference
+import com.dxshulya.wasabi.domain.model.Authorization
+import com.dxshulya.wasabi.domain.model.User
 import com.dxshulya.wasabi.data.repository.TaskRepository
+import com.dxshulya.wasabi.domain.datastore.ISharedPreference
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -22,10 +24,10 @@ class RegistrationViewModel : ViewModel() {
     }
 
     @Inject
-    lateinit var taskRepository: TaskRepository
+    lateinit var taskRepository: ITaskRepository
 
     @Inject
-    lateinit var sharedPreference: SharedPreference
+    lateinit var sharedPreference: ISharedPreference
 
     private var _registrationLiveData = MutableLiveData<Authorization>()
     val registrationLiveData: LiveData<Authorization>

@@ -1,6 +1,6 @@
 package com.dxshulya.wasabi.core.token
 
-import com.dxshulya.wasabi.data.datastore.SharedPreference
+import com.dxshulya.wasabi.domain.datastore.SharedPreference
 import okhttp3.Interceptor
 import okhttp3.Response
 

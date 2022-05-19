@@ -8,9 +8,11 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.rxjava3.cachedIn
 import com.dxshulya.wasabi.App
-import com.dxshulya.wasabi.data.datastore.SharedPreference
-import com.dxshulya.wasabi.data.model.Favorites
+import com.dxshulya.wasabi.data.repository.ITaskRepository
+import com.dxshulya.wasabi.domain.datastore.SharedPreference
+import com.dxshulya.wasabi.domain.model.Favorites
 import com.dxshulya.wasabi.data.repository.TaskRepository
+import com.dxshulya.wasabi.domain.datastore.ISharedPreference
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
@@ -22,10 +24,10 @@ class FavoriteViewModel : ViewModel() {
     }
 
     @Inject
-    lateinit var taskRepository: TaskRepository
+    lateinit var taskRepository: ITaskRepository
 
     @Inject
-    lateinit var sharedPreference: SharedPreference
+    lateinit var sharedPreference: ISharedPreference
 
     private var _favorites = MutableLiveData<PagingData<Favorites.Favorite>>()
     val favorites: LiveData<PagingData<Favorites.Favorite>>

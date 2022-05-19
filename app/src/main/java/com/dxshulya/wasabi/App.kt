@@ -1,7 +1,7 @@
 package com.dxshulya.wasabi
 
 import android.app.Application
-import com.dxshulya.wasabi.data.datastore.SharedPreference
+import com.dxshulya.wasabi.domain.datastore.SharedPreference
 import com.dxshulya.wasabi.core.di.*
 
 class App: Application() {

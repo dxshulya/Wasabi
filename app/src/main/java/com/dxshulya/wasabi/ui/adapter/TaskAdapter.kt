@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.dxshulya.wasabi.R
 import com.dxshulya.wasabi.databinding.TaskItemBinding
-import com.dxshulya.wasabi.data.model.Task
+import com.dxshulya.wasabi.domain.model.Task
 import com.dxshulya.wasabi.ui.item.TaskItemViewModel
 
 
